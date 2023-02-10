@@ -1,0 +1,20 @@
+Radio Delfino|https://nr8.newradio.it/proxy/emaamo00?mp=/stream
+Radio 1 Classics|http://icecast.vrtcdn.be/radio1_classics_high.mp3
+Radio 1|http://icecast.vrtcdn.be/radio1-high.mp3
+Radio 2 OVL|http://icecast.vrtcdn.be/ra2ovl-high.mp3
+Classics 21|https://radios.rtbf.be/classic21-128.mp3
+D.I. Blues|http://orion.shoutca.st:8990/stream
+D.I. Jazz|http://orion.shoutca.st:8950/stream
+R. Paradise Rock|http://stream.radioparadise.com/rock-flacm
+StuBru Tijdloze|http://icecast.vrtcdn.be/stubru_tijdloze-high.mp3
+Willy|https://playerservices.streamtheworld.com/api/livestream-redirect/WILLY.mp3
+Radio Paradise Main|https://stream.radioparadise.com/aac-320
+Radio Paradise Mellow|https://stream.radioparadise.com/mellow-320
+Studio Brussel|http://icecast.vrtcdn.be/stubru-high.mp3
+MNM Hits|http://icecast.vrtcdn.be/mnm_hits-high.mp3
+D.I. Rock|http://orion.shoutca.st:8871/stream
+The Jazz Groove|http://west-aac-64.streamthejazzgroove.com/stream
+Radio Caroline|http://sc3.radiocaroline.net:8030
+Zappa Radio|http://streams.norbert.de:8000/zappa.aac
+RSI Rete Uno|http://stream.srg-ssr.ch/m/reteuno/mp3_128
+Radio Cymru|http://stream.live.vc.bbcmedia.co.uk/bbc_radio_cymru

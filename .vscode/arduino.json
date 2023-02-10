@@ -1,0 +1,7 @@
+{
+    "configuration": "FlashMode=qio,FlashFreq=80,PartitionScheme=default,UploadSpeed=921600,DebugLevel=none,EraseFlash=none",
+    "board": "m5stack:esp32:m5stack-core-esp32",
+    "port": "COM5",
+    "sketch": "M5Core2MpdCli\\M5Core2MpdCli.ino",
+    "output": "build"
+}
