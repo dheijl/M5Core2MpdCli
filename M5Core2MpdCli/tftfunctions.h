@@ -11,3 +11,4 @@ void tft_println(const String s, uint16_t color = TFT_WHITE);
 void tft_println_error(const String s);
 void tft_println_highlight(const String s);
 void tft_clear();
+void tft_sleep();

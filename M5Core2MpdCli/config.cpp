@@ -45,7 +45,7 @@ bool save_FLASH_config()
 {
     tft_clear();
     tft_println("Save FLASH config");
-    if (write_wifi_FLASH(config) && write_player_FLASH(config) && write_favourites_FLASH(config)) {
+    if (write_wifi_FLASH(config) && write_players_FLASH(config) && write_favourites_FLASH(config)) {
         return true;
     } else {
         return false;

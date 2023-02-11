@@ -4,6 +4,8 @@
 
 #include "tftfunctions.h"
 
+static bool sleeping = false;
+
 void init_tft()
 {
     M5.Display.begin();
@@ -12,11 +14,14 @@ void init_tft()
     M5.Display.setTextColor(TFT_WHITE);
     M5.Display.setTextSize(1);
     M5.Display.setFont(FM9);
-    // M5.Display.println("TFT initialized!");
 }
 
 void tft_write(int16_t x, int16_t y, uint16_t color, const String s)
 {
+    if (sleeping) {
+        sleeping = false;
+        M5.Display.wakeup();
+    }
     M5.Display.setCursor(x, y);
     M5.Display.setTextColor(color);
     M5.Display.print(s.c_str());
@@ -35,6 +40,10 @@ void tft_write_highlight(int16_t x, int16_t y, const String s)
 
 void tft_println(const String s, uint16_t color)
 {
+    if (sleeping) {
+        sleeping = false;
+        M5.Display.wakeup();
+    }
     M5.Display.setTextColor(color);
     M5.Display.println(s);
     DPRINT(s);
@@ -52,6 +61,10 @@ void tft_println_highlight(const String s)
 
 void tft_print(const String s)
 {
+    if (sleeping) {
+        sleeping = false;
+        M5.Display.wakeup();
+    }
     M5.Display.print(s);
 }
 
@@ -60,4 +73,10 @@ void tft_clear()
     M5.Display.fillScreen(TFT_BLACK);
     M5.Display.setCursor(0, 0);
     M5.Display.println();
+}
+
+void tft_sleep()
+{
+    M5.Display.sleep();
+    sleeping = true;
 }

@@ -26,6 +26,7 @@ static MPD_PLAYER* get_mpd()
 static void disconnect_mpd()
 {
     tft_clear();
+    tft_sleep();
 }
 
 void toggle_mpd_status()

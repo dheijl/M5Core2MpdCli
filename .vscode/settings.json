@@ -42,6 +42,11 @@
         "xmemory": "cpp",
         "bitset": "cpp",
         "limits": "cpp",
-        "xlocmes": "cpp"
+        "xlocmes": "cpp",
+        "ios": "cpp",
+        "system_error": "cpp",
+        "xiosbase": "cpp",
+        "unordered_set": "cpp",
+        "*.tpp": "cpp"
     }
 }
