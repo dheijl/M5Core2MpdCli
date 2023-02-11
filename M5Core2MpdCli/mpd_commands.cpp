@@ -1,8 +1,9 @@
 #include "config.h"
+
+#include "mpd_commands.h"
 #include "mpdcli.h"
 #include "tftfunctions.h"
 #include "wifi.h"
-#include "mpd_commands.h"
 
 #include <M5Unified.h>
 

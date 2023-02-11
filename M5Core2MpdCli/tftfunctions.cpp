@@ -1,6 +1,8 @@
-#include "tftfunctions.h"
+#include "config.h"
 
-// TFT_eSPI tft = TFT_eSPI();
+#include "Free_Fonts.h"
+
+#include "tftfunctions.h"
 
 void init_tft()
 {

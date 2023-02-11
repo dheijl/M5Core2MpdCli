@@ -4,13 +4,13 @@
 #include <vector>
 
 #include <Arduino.h>
-#include <SD.h>
 #include <Preferences.h>
+#include <SD.h>
 
 using namespace std;
 
-//#undef DEBUG
-#define DEBUG
+#undef DEBUG
+//#define DEBUG
 #undef DEBUGMPDMESSAGES
 
 #ifdef DEBUG
@@ -20,22 +20,22 @@ using namespace std;
 #endif
 
 typedef struct mpd_player {
-  const char* player_name;
-  const char* player_ip;
-  uint16_t player_port;
+    const char* player_name;
+    const char* player_ip;
+    uint16_t player_port;
 } MPD_PLAYER;
 
 typedef struct favourite {
-  const char* fav_name;
-  const char* fav_url;
+    const char* fav_name;
+    const char* fav_url;
 } FAVOURITE;
 
 typedef struct config {
-  const char* ssid;
-  const char* psw;
-  uint16_t active_player;
-  vector<MPD_PLAYER*> mpd_players;
-  vector<FAVOURITE*> favourites;
+    const char* ssid;
+    const char* psw;
+    uint16_t active_player;
+    vector<MPD_PLAYER*> mpd_players;
+    vector<FAVOURITE*> favourites;
 } CONFIG;
 
 vector<string> split(const string& s, char delim);

@@ -1,5 +1,5 @@
-#include "config.h"
 #include "wifi.h"
+
 #include "tftfunctions.h"
 
 #include <M5Unified.h>
@@ -29,11 +29,11 @@ bool start_wifi(CONFIG& config)
     have_wifi = false;
     long now = millis();
     while ((millis() - now) < 10000) {
-      if (WiFi.status() == WL_CONNECTED) {
-          have_wifi = true;
-          break;
-      }
-      delay(100);
+        if (WiFi.status() == WL_CONNECTED) {
+            have_wifi = true;
+            break;
+        }
+        delay(100);
     }
     return have_wifi;
 }

@@ -1,7 +1,10 @@
+#include "config.h"
+
 #include "sdcard_fs.h"
 #include "tftfunctions.h"
+
 #include <SD.h>
-//
+
 #include <M5Unified.h>
 
 #define TFCARD_CS_PIN GPIO_NUM_4
@@ -20,8 +23,8 @@ bool read_wifi_SD(CONFIG& config)
     if (wifif) {
         result = parse_wifi_file(wifif, config);
     } else {
-      tft_println_error("error reading wifi.txt");
-      delay(1000);
+        tft_println_error("error reading wifi.txt");
+        delay(1000);
     }
     SD.end();
     return result;
@@ -39,8 +42,8 @@ bool read_players_SD(CONFIG& config)
     if (plf) {
         result = parse_players_file(plf, config);
     } else {
-      tft_println_error("error reading players.txt");
-      delay(1000);
+        tft_println_error("error reading players.txt");
+        delay(1000);
     }
 
     SD.end();
@@ -59,8 +62,8 @@ bool read_favourites_SD(CONFIG& config)
     if (favf) {
         result = parse_favs_file(favf, config);
     } else {
-      tft_println_error("error reading favs.txt");
-      delay(1000);
+        tft_println_error("error reading favs.txt");
+        delay(1000);
     }
 
     SD.end();

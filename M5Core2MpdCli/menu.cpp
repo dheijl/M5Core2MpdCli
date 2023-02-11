@@ -1,5 +1,10 @@
-#include "menu.h"
 #include "config.h"
+
+#include "menu.h"
+#include "tftfunctions.h"
+#include "flash_fs.h"
+#include "mpd_commands.h"
+
 #include <M5Unified.h>
 
 static void display_menuline(const MENULINE* line, uint16_t color)
@@ -65,13 +70,14 @@ static void select_player()
 {
     auto players = get_config().mpd_players;
     vector<MENULINE*> player_menu;
+    uint16_t x = 4;
     uint16_t pos = 40;
     for (auto p : players) {
-        MENULINE* m = new MENULINE { 4, pos, p->player_name };
+        MENULINE* m = new MENULINE { x, pos, p->player_name };
         pos += 40;
         player_menu.push_back(m);
     }
-    MENULINE* ret = new MENULINE { 4, pos, "Return" };
+    MENULINE* ret = new MENULINE { x, pos, "Return" };
     player_menu.push_back(ret);
     int selected = display_menu(player_menu);
     if ((selected >= 0) && (selected < players.size())) {
@@ -90,18 +96,19 @@ static void select_player()
 static void select_favourite(int page)
 {
     vector<MENULINE*> fav_menu;
+    uint16_t x = 4;
     uint16_t pos = 15;
     int ifrom = page * 10;
     int ito = ifrom + 10;
     CONFIG& config = get_config();
     for (int i = ifrom; i < ito; i++) {
         if (i < config.favourites.size()) {
-            MENULINE* m = new MENULINE { 4, pos, config.favourites[i]->fav_name };
+            MENULINE* m = new MENULINE { x, pos, config.favourites[i]->fav_name };
             pos += 20;
             fav_menu.push_back(m);
         }
     }
-    MENULINE* ret = new MENULINE { 4, pos, "Return" };
+    MENULINE* ret = new MENULINE { x, pos, "Return" };
     fav_menu.push_back(ret);
     int selected = display_menu(fav_menu);
     if ((selected >= 0) && (selected < fav_menu.size() - 1)) {
@@ -137,8 +144,8 @@ void show_menu()
     int npages = (npages % 10) == 0 ? (nfavs / 10) : (nfavs / 10) + 1;
     npages = min(npages, 5);
     vector<MENULINE*> main_menu;
-    int x = 4;
-    int y = 20;
+    uint16_t x = 4;
+    uint16_t y = 20;
     for (int i = 0; i <= npages; i++) {
         main_menu.push_back(new MENULINE { x, y, mlines[i] });
         y += 30;

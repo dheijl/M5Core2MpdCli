@@ -1,9 +1,10 @@
 #include <Arduino.h>
 #include <M5Unified.h>
 
+#include "config.h"
+
 #include "battery.h"
 #include "buttons.h"
-#include "config.h"
 #include "debug.h"
 #include "menu.h"
 #include "mpd_commands.h"
