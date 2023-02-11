@@ -6,7 +6,8 @@
 #include <vector>
 #include <cctype>
 
-#include "wifi.h"
+#include <WiFi.h>
+#include <WifiClient.h>
 #include "tftfunctions.h"
 
 using namespace std;

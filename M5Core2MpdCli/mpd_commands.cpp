@@ -1,4 +1,9 @@
+#include "config.h"
+#include "mpdcli.h"
+#include "tftfunctions.h"
+#include "wifi.h"
 #include "mpd_commands.h"
+
 #include <M5Unified.h>
 
 static string MPD_HOST = "";

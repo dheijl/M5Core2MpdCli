@@ -1,5 +1,10 @@
+#include "config.h"
 #include "wifi.h"
 #include "tftfunctions.h"
+
+#include <M5Unified.h>
+#include <WiFi.h>
+#include <WiFiMulti.h>
 
 static bool have_wifi = false;
 
@@ -16,18 +21,19 @@ bool start_wifi(CONFIG& config)
     }
 
     // Turn on WiFi
-    // pinMode(RTL8720D_CHIP_PU, OUTPUT);
-    // digitalWrite(RTL8720D_CHIP_PU, HIGH);
-    // delay(100);
-    WiFi.mode(WIFI_STA);
     WiFi.disconnect();
-    delay(100);
-    tft_println("Connecting WiFi...");
+    WiFi.softAPdisconnect(true);
+    tft_println("Connecting wifi...");
+    WiFi.mode(WIFI_STA);
     WiFi.begin(config.ssid, config.psw);
-    if (WiFi.status() == WL_CONNECTED) {
-        have_wifi = true;
-    } else {
-        have_wifi = false;
+    have_wifi = false;
+    long now = millis();
+    while ((millis() - now) < 10000) {
+      if (WiFi.status() == WL_CONNECTED) {
+          have_wifi = true;
+          break;
+      }
+      delay(100);
     }
     return have_wifi;
 }
@@ -39,7 +45,4 @@ void stop_wifi()
     have_wifi = false;
     delay(400);
     tft_clear();
-    // Turn off WiFi
-    // pinMode(RTL8720D_CHIP_PU, OUTPUT);
-    // digitalWrite(RTL8720D_CHIP_PU, LOW);
 }
