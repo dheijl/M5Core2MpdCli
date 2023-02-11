@@ -1,87 +1,82 @@
 #include "flash_fs.h"
-#include "config.h"
+
 #include "tftfunctions.h"
 
+#include <M5Unified.h>
+#include <Preferences.h>
+
+static Preferences prefs;
+
 bool write_wifi_FLASH(CONFIG& config)
-{ /*
-bool result = false;
-if (!SFUD.begin(104000000UL)) {
-tft_println("FLASH mount failed");
-return result;
-}
-if (SFUD.remove("wifi.txt")) {
-tft_println("wifi.txt removed");
-}
-String data = String(config.ssid) + "|" + String(config.psw);
-File wifif = SFUD.open("wifi.txt", FILE_WRITE);
-if (wifif) {
-wifif.println(data);
-DPRINT(data.c_str());
-wifif.close();
-result = true;
-} else {
-tft_println_error("Error writing wifi.txt");
-}
-SFUD.end();
-return result;
-*/
-    return true;
+{
+    bool result = false;
+    if (!prefs.begin("wifi", false)) {
+        tft_println_error("wifi prefs begin error");
+        prefs.end();
+        delay(1000);
+        return result;
+    }
+    result = true;
+    result = prefs.putString("ssid", config.ssid) > 0;
+    result = prefs.putString("psw", config.psw) > 0;
+    if (!result) {
+        tft_println_error("wifi prefs put error");
+        delay(1000);
+    }
+    prefs.end();
+    return result;
 }
 
 bool write_player_FLASH(CONFIG& config)
-{ /*
+{
     bool result = false;
-    if (!SFUD.begin(104000000UL)) {
-        tft_println_error("FLASH mount failed");
+    if (!prefs.begin("players", false)) {
+        tft_println_error("players prefs begin error");
+        prefs.end();
+        delay(1000);
         return result;
     }
-    if (SFUD.remove("players.txt")) {
-        tft_println("players.txt removed");
-    }
-    File plf = SFUD.open("players.txt", FILE_WRITE);
-    if (plf) {
-        for (auto pl : config.mpd_players) {
-            String data = String(pl->player_name) + "|" + String(pl->player_ip) + "|" + String(to_string(pl->player_port).c_str());
-            plf.println(data);
-            DPRINT(data.c_str());
+    result = true;
+    int i = 0;
+    for (auto pl : config.mpd_players) {
+        String data = String(pl->player_name) + "|" + String(pl->player_ip) + "|" + String(to_string(pl->player_port).c_str());
+        if (prefs.putString(std::to_string(i).c_str(), data) == 0) {
+            result = false;
+            tft_println_error("players prefs put error");
+            delay(1000);
+            break;
         }
-        plf.close();
-        result = true;
-    } else {
-        tft_println_error("Error writing wifi.txt");
+        DPRINT(data.c_str());
+        ++i;
     }
-    SFUD.end();
+    prefs.end();
     return result;
-    */
-    return true;
 }
 
 bool write_favourites_FLASH(CONFIG& config)
-{ /*
+{
     bool result = false;
-    if (!SFUD.begin(104000000UL)) {
-        tft_println_error("FLASH mount failed");
+    if (!prefs.begin("favs", false)) {
+        tft_println_error("favs prefs begin error");
+        prefs.end();
+        delay(1000);
         return result;
     }
-    if (SFUD.remove("favs.txt")) {
-        tft_println("favs.txt removed");
-    }
-    File favf = SFUD.open("favs.txt", FILE_WRITE);
-    if (favf) {
-        for (auto f : config.favourites) {
-            String data = String(f->fav_name) + "|" + String(f->fav_url);
-            favf.println(data);
-            DPRINT(data.c_str());
+    result = true;
+    int i = 0;
+    for (auto f : config.favourites) {
+        String data = String(f->fav_name) + "|" + String(f->fav_url);
+        if (prefs.putString(std::to_string(i).c_str(), data) == 0) {
+            result = false;
+            tft_println_error("favs prefs put error");
+            delay(1000);
+            break;
         }
-        favf.close();
-        result = true;
-    } else {
-        tft_println_error("Error writing favs.txt");
+        DPRINT(data.c_str());
+        ++i;
     }
-    SFUD.end();
+    prefs.end();
     return result;
-    */
-    return true;
 }
 
 bool read_wifi_FLASH(CONFIG& config)
