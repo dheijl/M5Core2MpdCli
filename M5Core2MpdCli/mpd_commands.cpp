@@ -7,15 +7,12 @@
 
 #include <M5Unified.h>
 
-static string MPD_HOST = "";
-static const int MPD_PORT = 6600;
-
 static MPD_PLAYER* get_mpd()
 {
-    if (start_wifi(get_config())) {
-        CONFIG& config = get_config();
+    auto config = get_config();
+    if (start_wifi(config)) {
         MPD_PLAYER* mpd = config.mpd_players[config.active_player];
-        tft_println("Player: " + String(mpd->player_ip));
+        tft_println("Player: " + String(config.active_player) + " " + String(mpd->player_name));
         return mpd;
     } else {
         tft_println_error("Can't connect.");

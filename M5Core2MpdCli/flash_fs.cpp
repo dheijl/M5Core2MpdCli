@@ -187,11 +187,9 @@ bool read_favourites_FLASH(CONFIG& config)
     return result;
 }
 
-void write_current_player(int new_pl)
+void write_current_player(uint16_t new_pl)
 {
     Preferences prefs;
-    auto config = get_config();
-    config.active_player = (uint16_t)new_pl;
     if (!prefs.begin(NVS_CUR_MPD, false)) {
         tft_println_error("cur_mpd prefs begin error");
         prefs.end();
@@ -199,7 +197,7 @@ void write_current_player(int new_pl)
         return;
     }
     DPRINT("wprefs player: " + String(new_pl));
-    bool result = prefs.putUShort("cur_mpd", (uint16_t)new_pl) > 0;
+    bool result = prefs.putUShort("cur_mpd", new_pl) > 0;
     if (!result) {
         tft_println_error("cur_mpd prefs put error");
         delay(1000);

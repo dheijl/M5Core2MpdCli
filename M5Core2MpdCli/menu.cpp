@@ -55,7 +55,8 @@ static int display_menu(const vector<MENULINE*> menu)
 
 static void select_player()
 {
-    auto players = get_config().mpd_players;
+    auto config = get_config();
+    auto players = config.mpd_players;
     vector<MENULINE*> player_menu;
     uint16_t x = 4;
     uint16_t pos = 40;
@@ -71,6 +72,7 @@ static void select_player()
         auto pl = players[selected]->player_name;
         tft_clear();
         tft_println("New player @" + String(pl));
+        config.active_player = (uint16_t)selected;
         write_current_player(selected);
     }
     for (auto ml = player_menu.begin(); ml != player_menu.end(); ++ml) {

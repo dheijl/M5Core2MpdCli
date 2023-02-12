@@ -56,7 +56,6 @@ void loop()
     unsigned long wifi_timer = 5000UL;
     if (M5.BtnA.wasPressed()) {
         start_wifi(get_config());
-        wifi_started = millis();
         show_mpd_status();
         wifi_started = millis();
     }

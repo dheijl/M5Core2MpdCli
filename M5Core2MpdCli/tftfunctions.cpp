@@ -10,10 +10,10 @@ void init_tft()
 {
     M5.Display.begin();
     M5.Display.setRotation(3);
+    M5.Display.setFont(FM9);
     M5.Display.fillScreen(TFT_BLACK);
     M5.Display.setTextColor(TFT_WHITE);
     M5.Display.setTextSize(1);
-    M5.Display.setFont(FM9);
 }
 
 void tft_write(int16_t x, int16_t y, uint16_t color, const String s)
