@@ -54,11 +54,6 @@ void loop()
 {
     M5.update();
     unsigned long wifi_timer = 5000UL;
-    if (M5.BtnA.wasHold()) {
-        start_wifi(get_config());
-        show_menu();
-        wifi_started = millis();
-    }
     if (M5.BtnA.wasPressed()) {
         start_wifi(get_config());
         wifi_started = millis();
@@ -66,7 +61,9 @@ void loop()
         wifi_started = millis();
     }
     if (M5.BtnB.wasPressed()) {
-        printBatteryStats();
+        start_wifi(get_config());
+        show_menu();
+        wifi_started = millis();
     }
     if (M5.BtnC.wasPressed()) {
         start_wifi(get_config());
@@ -75,6 +72,7 @@ void loop()
     }
     if ((is_wifi_connected() && (millis() - wifi_started) > wifi_timer)) {
         stop_wifi();
+        M5.Power.powerOff();
     }
     delay(1);
 }

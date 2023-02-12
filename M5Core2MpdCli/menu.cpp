@@ -31,7 +31,7 @@ static int display_menu(const vector<MENULINE*> menu)
         }
         int down_time = 400;
         M5.update();
-        if (M5.BtnA.wasPressed()) {
+        if (M5.BtnC.wasPressed()) { // up
             while ((M5.BtnA.isPressed()) && (down_time-- > 0)) {
                 M5.update();
             }
@@ -42,7 +42,7 @@ static int display_menu(const vector<MENULINE*> menu)
             repaint = true;
             continue;
         }
-        if (M5.BtnC.wasPressed()) {
+        if (M5.BtnA.wasPressed()) { // down
             while ((M5.BtnC.isPressed()) && (down_time-- > 0)) {
                 M5.update();
             }
@@ -53,7 +53,7 @@ static int display_menu(const vector<MENULINE*> menu)
             repaint = true;
             continue;
         }
-        if (M5.BtnB.wasPressed()) {
+        if (M5.BtnB.wasPressed()) { // select
             while ((M5.BtnB.isPressed()) && (down_time-- > 0)) {
                 M5.update();
             }

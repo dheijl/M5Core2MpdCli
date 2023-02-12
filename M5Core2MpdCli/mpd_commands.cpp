@@ -26,7 +26,6 @@ static MPD_PLAYER* get_mpd()
 static void disconnect_mpd()
 {
     tft_clear();
-    tft_sleep();
 }
 
 void toggle_mpd_status()
@@ -50,6 +49,8 @@ void toggle_mpd_status()
 
 void show_mpd_status()
 {
+    int bat_level = M5.Power.getBatteryLevel();
+    tft_println("Battery: " + String(std::to_string(bat_level).c_str()));
     auto player = get_mpd();
     if (player != NULL) {
         MpdConnection con;

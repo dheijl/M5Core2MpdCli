@@ -251,7 +251,10 @@ public:
             }
             MpdConnect con(data);
             String v = String(con.getVersion().c_str());
-            tft_println(v);
+            if (v.indexOf("OK") < 0) {
+              tft_println_error(v);
+              return false;
+            }
             return true;
         } else {
             tft_println("MPD Connection failed");
