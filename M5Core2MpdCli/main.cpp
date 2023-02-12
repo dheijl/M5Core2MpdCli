@@ -72,7 +72,11 @@ void loop()
     }
     if ((is_wifi_connected() && (millis() - wifi_started) > wifi_timer)) {
         stop_wifi();
-        M5.Power.powerOff();
+        if (!M5.Power.isCharging()) {
+          M5.Power.powerOff();
+        } else {
+          tft_sleep();
+        }
     }
     delay(1);
 }

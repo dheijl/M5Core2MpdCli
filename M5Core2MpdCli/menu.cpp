@@ -29,12 +29,8 @@ static int display_menu(const vector<MENULINE*> menu)
                 }
             }
         }
-        int down_time = 400;
         M5.update();
         if (M5.BtnC.wasPressed()) { // up
-            while ((M5.BtnA.isPressed()) && (down_time-- > 0)) {
-                M5.update();
-            }
             selected -= 1;
             if (selected < 0) {
                 selected = menu.size() - 1;
@@ -43,9 +39,6 @@ static int display_menu(const vector<MENULINE*> menu)
             continue;
         }
         if (M5.BtnA.wasPressed()) { // down
-            while ((M5.BtnC.isPressed()) && (down_time-- > 0)) {
-                M5.update();
-            }
             selected += 1;
             if (selected > (menu.size() - 1)) {
                 selected = 0;
@@ -54,13 +47,7 @@ static int display_menu(const vector<MENULINE*> menu)
             continue;
         }
         if (M5.BtnB.wasPressed()) { // select
-            while ((M5.BtnB.isPressed()) && (down_time-- > 0)) {
-                M5.update();
-            }
             return selected;
-        }
-        if (M5.BtnPWR.wasPressed()) {
-            return -1;
         }
         delay(1);
     }

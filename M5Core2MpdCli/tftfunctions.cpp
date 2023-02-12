@@ -70,6 +70,10 @@ void tft_print(const String s)
 
 void tft_clear()
 {
+    if (sleeping) {
+        sleeping = false;
+        M5.Display.wakeup();
+    }
     M5.Display.fillScreen(TFT_BLACK);
     M5.Display.setCursor(0, 0);
     M5.Display.println();
