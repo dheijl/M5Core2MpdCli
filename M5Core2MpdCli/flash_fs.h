@@ -3,7 +3,7 @@
 #include "config.h"
 
 bool read_current_player(CONFIG& config);
-void write_current_player(CONFIG& config, int new_pl);
+void write_current_player(int new_pl);
 
 bool write_wifi_FLASH(CONFIG& config);
 bool write_players_FLASH(CONFIG& config);

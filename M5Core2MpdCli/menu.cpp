@@ -1,9 +1,9 @@
 #include "config.h"
 
-#include "menu.h"
-#include "tftfunctions.h"
 #include "flash_fs.h"
+#include "menu.h"
 #include "mpd_commands.h"
+#include "tftfunctions.h"
 
 #include <M5Unified.h>
 
@@ -84,7 +84,7 @@ static void select_player()
         auto pl = players[selected]->player_name;
         tft_clear();
         tft_println("New player @" + String(pl));
-        write_current_player(get_config(), selected);
+        write_current_player(selected);
     }
     for (auto ml = player_menu.begin(); ml != player_menu.end(); ++ml) {
         delete *ml;
