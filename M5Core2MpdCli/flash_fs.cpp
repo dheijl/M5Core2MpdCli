@@ -20,7 +20,6 @@ bool write_wifi_FLASH(CONFIG& config)
         delay(1000);
         return result;
     }
-    prefs.clear();
     result = true;
     DPRINT("wprefs: " + String(config.ssid) + "|" + String(config.psw));
     result = prefs.putString("ssid", config.ssid) > 0;
@@ -36,24 +35,24 @@ bool write_wifi_FLASH(CONFIG& config)
 bool read_wifi_FLASH(CONFIG& config)
 {
     Preferences prefs;
-    bool result = false;
     if (!prefs.begin(NVS_WIFI, true)) {
         tft_println_error("wifi prefs begin error");
         prefs.end();
         delay(1000);
-        return result;
+        return false;
     }
     String ssid = prefs.getString("ssid");
     String psw = prefs.getString("psw");
-    DPRINT(ssid + "|" + psw);
-    if (!(ssid.isEmpty() && psw.isEmpty())) {
-        result = true;
-        auto config = get_config();
-        config.ssid = strdup(ssid.c_str());
-        config.psw = strdup(psw.c_str());
-    }
     prefs.end();
-    return result;
+    DPRINT(ssid + "|" + psw);
+    if (ssid.isEmpty() || psw.isEmpty()) {
+      tft_println_error("empty wifi prefs!");
+      return false;
+    }
+    config.ssid = strdup(ssid.c_str());
+    config.psw = strdup(psw.c_str());
+    DPRINT("Wifi config: " + String(config.ssid) + "|" + String(config.psw));
+    return true;
 }
 
 bool write_players_FLASH(CONFIG& config)
@@ -66,7 +65,6 @@ bool write_players_FLASH(CONFIG& config)
         delay(1000);
         return result;
     }
-    prefs.clear();
     result = true;
     int i = 0;
     for (auto pl : config.mpd_players) {
@@ -134,7 +132,6 @@ bool write_favourites_FLASH(CONFIG& config)
         delay(1000);
         return result;
     }
-    prefs.clear();
     result = true;
     int i = 0;
     for (auto f : config.favourites) {
@@ -201,7 +198,6 @@ void write_current_player(int new_pl)
         delay(1000);
         return;
     }
-    prefs.clear();
     DPRINT("wprefs player: " + String(new_pl));
     bool result = prefs.putUShort("cur_mpd", (uint16_t)new_pl) > 0;
     if (!result) {
@@ -220,6 +216,7 @@ bool read_current_player(CONFIG& config)
         write_current_player(0);
         return true;
     }
+    bool result = false;
     int cur_mpd = prefs.getUShort("cur_mpd", 999);
     DPRINT("cur_mpd = " + String(cur_mpd));
     if (cur_mpd != 999) {
