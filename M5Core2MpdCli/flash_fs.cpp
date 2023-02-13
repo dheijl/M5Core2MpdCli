@@ -197,6 +197,7 @@ void write_current_player(uint16_t new_pl)
         return;
     }
     DPRINT("wprefs player: " + String(new_pl));
+    set_player(new_pl);
     bool result = prefs.putUShort("cur_mpd", new_pl) > 0;
     if (!result) {
         tft_println_error("cur_mpd prefs put error");
@@ -205,7 +206,7 @@ void write_current_player(uint16_t new_pl)
     prefs.end();
 }
 
-bool read_current_player(CONFIG& config)
+bool read_current_player()
 {
     Preferences prefs;
     if (!prefs.begin(NVS_CUR_MPD, true)) {
@@ -218,8 +219,8 @@ bool read_current_player(CONFIG& config)
     int cur_mpd = prefs.getUShort("cur_mpd", 999);
     DPRINT("cur_mpd = " + String(cur_mpd));
     if (cur_mpd != 999) {
+        set_player(cur_mpd);
         result = true;
-        config.active_player = cur_mpd;
     }
     prefs.end();
     return result;

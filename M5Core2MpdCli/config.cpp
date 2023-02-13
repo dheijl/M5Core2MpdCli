@@ -19,6 +19,10 @@ vector<string> split(const string& s, char delim)
     return result;
 }
 
+void set_player(uint16_t new_pl) {
+  config.active_player = new_pl;
+}
+
 bool load_SD_config()
 {
     tft_clear();
@@ -34,7 +38,7 @@ bool load_FLASH_config()
 {
     tft_clear();
     tft_println("Load FLASH config");
-    if (read_wifi_FLASH(config) && read_players_FLASH(config) && read_favourites_FLASH(config) && read_current_player(config)) {
+    if (read_wifi_FLASH(config) && read_players_FLASH(config) && read_favourites_FLASH(config) && read_current_player()) {
         return true;
     } else {
         return false;
