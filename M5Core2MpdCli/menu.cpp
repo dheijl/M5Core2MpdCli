@@ -130,7 +130,7 @@ void show_menu()
     tft_clear();
     CONFIG& config = get_config();
     int nfavs = config.favourites.size();
-    int npages = (npages % 10) == 0 ? (nfavs / 10) : (nfavs / 10) + 1;
+    int npages = (nfavs % 10) == 0 ? (nfavs / 10) : (nfavs / 10) + 1;
     npages = min(npages, 5);
     vector<MENULINE*> main_menu;
     uint16_t x = 4;

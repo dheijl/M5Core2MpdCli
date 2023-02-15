@@ -8,6 +8,7 @@ D.I. Jazz|http://orion.shoutca.st:8950/stream
 R. Paradise Rock|http://stream.radioparadise.com/rock-flacm
 StuBru Tijdloze|http://icecast.vrtcdn.be/stubru_tijdloze-high.mp3
 Willy|https://playerservices.streamtheworld.com/api/livestream-redirect/WILLY.mp3
+Willy-class-x|https://icecast-qmusicbe-cdp.triple-it.nl/willy-class-x.mp3
 Radio Paradise Main|https://stream.radioparadise.com/aac-320
 Radio Paradise Mellow|https://stream.radioparadise.com/mellow-320
 Studio Brussel|http://icecast.vrtcdn.be/stubru-high.mp3
