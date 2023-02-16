@@ -26,8 +26,10 @@ The currently active MPD player is stored in the ESP32 NVS preferences in flash,
 At power-on or reset the SD card slot is checked for the presence of an SD card with configuration files:
 
 - wifi.txt: textfile containing a single line with Wifi SSID and password separated by a | (pipe). No spaces or quotes.
-- players.txt: textfile containing up to 5 lines each with a player name and ipv4-address separated by a | (pipe). No spaces or quotes.
+- players.txt: textfile containing up to 5 lines each with a player name and ipv4-address and port number separated by a | (pipe). No spaces or quotes.
 - favs.txt: textfile containing up to 50 lines each with a favourite name and an url separated by a | (pipe). No spaces or quotes.
+
+See the [example_config](https://github.com/dheijl/M5Core2MpdCli/tree/main/example_config) folder for an example of these files.
 
 If present these files are read in and copied to internal ESP32 NVS preferences in flash. At subsequents power-ons this flash config is used (unless an SD card is present with a new config).
 
