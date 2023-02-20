@@ -223,7 +223,7 @@ private:
     {
         int n = 5000;
         while (n-- > 0) {
-            delay(1);
+            vTaskDelay(1);
             if (Client.available()) {
                 break;
             }
@@ -252,8 +252,8 @@ public:
             MpdConnect con(data);
             String v = String(con.getVersion().c_str());
             if (v.indexOf("OK") < 0) {
-              tft_println_error(v);
-              return false;
+                tft_println_error(v);
+                return false;
             }
             return true;
         } else {

@@ -31,9 +31,10 @@ bool start_wifi(CONFIG& config)
     while ((millis() - now) < 10000) {
         if (WiFi.status() == WL_CONNECTED) {
             have_wifi = true;
+            M5.Power.setLed(128);
             break;
         }
-        delay(100);
+        vTaskDelay(50);
     }
     return have_wifi;
 }
@@ -43,6 +44,6 @@ void stop_wifi()
     tft_println("Disconnect Wifi");
     WiFi.disconnect();
     have_wifi = false;
-    delay(400);
     tft_clear();
+    M5.Power.setLed(0);
 }

@@ -49,7 +49,7 @@ static int display_menu(const vector<MENULINE*> menu)
         if (M5.BtnB.wasPressed()) { // select
             return selected;
         }
-        delay(1);
+        vTaskDelay(1);
     }
 }
 
@@ -79,7 +79,6 @@ static void select_player()
         delete *ml;
     }
     player_menu.clear();
-    delay(500);
 }
 
 static void select_favourite(int page)
@@ -150,7 +149,5 @@ void show_menu()
         delete *ml;
     }
     main_menu.clear();
-
-    delay(500);
     tft_clear();
 }

@@ -17,14 +17,14 @@ bool read_wifi_SD(CONFIG& config)
         return result;
     }
     tft_println_highlight("SD card present!");
-    delay(1000);
+    vTaskDelay(50);
     tft_println_highlight("Loading wifi");
     File wifif = SD.open("/wifi.txt", FILE_READ);
     if (wifif) {
         result = parse_wifi_file(wifif, config);
     } else {
         tft_println_error("error reading wifi.txt");
-        delay(1000);
+        vTaskDelay(1000);
     }
     SD.end();
     return result;
@@ -43,7 +43,7 @@ bool read_players_SD(CONFIG& config)
         result = parse_players_file(plf, config);
     } else {
         tft_println_error("error reading players.txt");
-        delay(1000);
+        vTaskDelay(1000);
     }
 
     SD.end();
@@ -63,7 +63,7 @@ bool read_favourites_SD(CONFIG& config)
         result = parse_favs_file(favf, config);
     } else {
         tft_println_error("error reading favs.txt");
-        delay(1000);
+        vTaskDelay(1000);
     }
 
     SD.end();

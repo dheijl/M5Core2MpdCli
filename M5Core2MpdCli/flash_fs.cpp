@@ -17,7 +17,7 @@ bool write_wifi_FLASH(CONFIG& config)
     if (!prefs.begin(NVS_WIFI, false)) {
         tft_println_error("wifi prefs begin error");
         prefs.end();
-        delay(2000);
+        vTaskDelay(2000);
         return result;
     }
     result = true;
@@ -26,7 +26,7 @@ bool write_wifi_FLASH(CONFIG& config)
     result = prefs.putString("psw", config.psw) > 0;
     if (!result) {
         tft_println_error("wifi prefs put error");
-        delay(2000);
+        vTaskDelay(2000);
     }
     prefs.end();
     return result;
@@ -38,7 +38,7 @@ bool read_wifi_FLASH(CONFIG& config)
     if (!prefs.begin(NVS_WIFI, true)) {
         tft_println_error("wifi prefs begin error");
         prefs.end();
-        delay(2000);
+        vTaskDelay(2000);
         return false;
     }
     String ssid = prefs.getString("ssid");
@@ -62,7 +62,7 @@ bool write_players_FLASH(CONFIG& config)
     if (!prefs.begin(NVS_PLAYERS, false)) {
         tft_println_error("players prefs begin error");
         prefs.end();
-        delay(2000);
+        vTaskDelay(2000);
         return result;
     }
     result = true;
@@ -73,7 +73,7 @@ bool write_players_FLASH(CONFIG& config)
         if (prefs.putString(key.c_str(), data) == 0) {
             result = false;
             tft_println_error("players prefs put error");
-            delay(2000);
+            vTaskDelay(2000);
             break;
         }
         DPRINT(data.c_str());
@@ -91,7 +91,7 @@ bool read_players_FLASH(CONFIG& config)
     if (!prefs.begin(NVS_PLAYERS, true)) {
         tft_println_error("players prefs begin error");
         prefs.end();
-        delay(2000);
+        vTaskDelay(2000);
         return result;
     }
     int i = 0;
@@ -129,7 +129,7 @@ bool write_favourites_FLASH(CONFIG& config)
     if (!prefs.begin("favs", false)) {
         tft_println_error("favs prefs begin error");
         prefs.end();
-        delay(2000);
+        vTaskDelay(2000);
         return result;
     }
     result = true;
@@ -140,7 +140,7 @@ bool write_favourites_FLASH(CONFIG& config)
         if (prefs.putString(key.c_str(), data) == 0) {
             result = false;
             tft_println_error("favs prefs put error");
-            delay(2000);
+            vTaskDelay(2000);
             break;
         }
         DPRINT(data.c_str());
@@ -158,7 +158,7 @@ bool read_favourites_FLASH(CONFIG& config)
     if (!prefs.begin("favs", true)) {
         tft_println_error("favs prefs begin error");
         prefs.end();
-        delay(2000);
+        vTaskDelay(2000);
         return result;
     }
     int i = 0;
@@ -193,7 +193,7 @@ void write_current_player(uint16_t new_pl)
     if (!prefs.begin(NVS_CUR_MPD, false)) {
         tft_println_error("cur_mpd prefs begin error");
         prefs.end();
-        delay(2000);
+        vTaskDelay(2000);
         return;
     }
     DPRINT("wprefs player: " + String(new_pl));
@@ -201,7 +201,7 @@ void write_current_player(uint16_t new_pl)
     bool result = prefs.putUShort("cur_mpd", new_pl) > 0;
     if (!result) {
         tft_println_error("cur_mpd prefs put error");
-        delay(2000);
+        vTaskDelay(2000);
     }
     prefs.end();
 }
@@ -213,6 +213,7 @@ bool read_current_player()
         prefs.end();
         tft_println_highlight("No cur_mpd prefs!");
         write_current_player(0);
+        set_player(0);
         return true;
     }
     bool result = false;

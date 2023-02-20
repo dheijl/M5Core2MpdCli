@@ -56,7 +56,7 @@ void show_mpd_status()
             con.GetCurrentSong();
             con.Disconnect();
         }
-        delay(3000);
+        vTaskDelay(3000);
         disconnect_mpd();
     }
 }
@@ -71,7 +71,7 @@ void play_favourite(const char* url)
             con.Add_Url(url);
             con.Play();
         }
-        delay(2000);
+        vTaskDelay(2000);
         disconnect_mpd();
     }
 }

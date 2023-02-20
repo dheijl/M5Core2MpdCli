@@ -45,15 +45,16 @@ void setup()
         wifi_started = millis();
     } else {
         tft_println("Connection FAIL!");
-        delay(1000);
+        vTaskDelay(1000);
     }
     tft_clear();
 }
 
+const unsigned long wifi_timer = 10000UL;
+
 void loop()
 {
     M5.update();
-    unsigned long wifi_timer = 5000UL;
     if (M5.BtnA.wasPressed()) {
         start_wifi(get_config());
         show_mpd_status();
@@ -69,13 +70,12 @@ void loop()
         toggle_mpd_status();
         wifi_started = millis();
     }
+    tft_sleep();
     if ((is_wifi_connected() && (millis() - wifi_started) > wifi_timer)) {
         stop_wifi();
         if (!M5.Power.isCharging()) {
-          M5.Power.powerOff();
-        } else {
-          tft_sleep();
+            M5.Power.powerOff();
         }
     }
-    delay(1);
+    vTaskDelay(1);
 }

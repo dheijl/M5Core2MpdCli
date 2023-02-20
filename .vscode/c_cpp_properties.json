@@ -268,7 +268,7 @@
                 "ESP_PLATFORM",
                 "_POSIX_READER_WRITER_LOCKS",
                 "F_CPU=240000000L",
-                "ARDUINO=10819",
+                "ARDUINO=10607",
                 "ARDUINO_M5Stack_Core_ESP32",
                 "ARDUINO_ARCH_ESP32",
                 "ARDUINO_BOARD=\"M5Stack_Core_ESP32\"",
