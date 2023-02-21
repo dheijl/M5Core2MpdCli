@@ -39,7 +39,7 @@ void setup()
         }
     }
     // start wifi
-    if (start_wifi(get_config())) {
+    if (start_wifi(get_config().ap)) {
         tft_clear();
         show_mpd_status();
         wifi_started = millis();
@@ -56,17 +56,17 @@ void loop()
 {
     M5.update();
     if (M5.BtnA.wasPressed()) {
-        start_wifi(get_config());
+        start_wifi(get_config().ap);
         show_mpd_status();
         wifi_started = millis();
     }
     if (M5.BtnB.wasPressed()) {
-        start_wifi(get_config());
+        start_wifi(get_config().ap);
         show_menu();
         wifi_started = millis();
     }
     if (M5.BtnC.wasPressed()) {
-        start_wifi(get_config());
+        start_wifi(get_config().ap);
         toggle_mpd_status();
         wifi_started = millis();
     }

@@ -13,7 +13,7 @@ const char* NVS_PLAYERS = "players";
 const char* NVS_FAVS = "favs";
 const char* NVS_CUR_MPD = "curmpd";
 
-bool write_wifi_FLASH(CONFIG& config)
+bool write_wifi_FLASH(WIFI_ACC_PT& ap)
 {
     Preferences prefs;
     bool result = false;
@@ -24,9 +24,9 @@ bool write_wifi_FLASH(CONFIG& config)
         return result;
     }
     result = true;
-    DPRINT("wprefs: " + String(config.ssid) + "|" + String(config.psw));
-    result = prefs.putString("ssid", config.ssid) > 0;
-    result = prefs.putString("psw", config.psw) > 0;
+    DPRINT("wprefs: " + String(ap.ssid) + "|" + String(ap.psw));
+    result = prefs.putString("ssid", ap.ssid) > 0;
+    result = prefs.putString("psw", ap.psw) > 0;
     if (!result) {
         tft_println_error("wifi prefs put error");
         vTaskDelay(2000);
@@ -35,7 +35,7 @@ bool write_wifi_FLASH(CONFIG& config)
     return result;
 }
 
-bool read_wifi_FLASH(CONFIG& config)
+bool read_wifi_FLASH(WIFI_ACC_PT& ap)
 {
     Preferences prefs;
     if (!prefs.begin(NVS_WIFI, true)) {
@@ -52,13 +52,13 @@ bool read_wifi_FLASH(CONFIG& config)
         tft_println_error("empty wifi prefs!");
         return false;
     }
-    config.ssid = strdup(ssid.c_str());
-    config.psw = strdup(psw.c_str());
-    DPRINT("Wifi config: " + String(config.ssid) + "|" + String(config.psw));
+    ap.ssid = strdup(ssid.c_str());
+    ap.psw = strdup(psw.c_str());
+    DPRINT("Wifi config: " + String(ap.ssid) + "|" + String(ap.psw));
     return true;
 }
 
-bool write_players_FLASH(CONFIG& config)
+bool write_players_FLASH(vector<MPD_PLAYER*>& players)
 {
     Preferences prefs;
     bool result = false;
@@ -70,7 +70,7 @@ bool write_players_FLASH(CONFIG& config)
     }
     result = true;
     int i = 0;
-    for (auto pl : config.mpd_players) {
+    for (auto pl : players) {
         string key = std::to_string(i);
         String data = String(pl->player_name) + "|" + String(pl->player_ip) + "|" + String(std::to_string(pl->player_port).c_str());
         if (prefs.putString(key.c_str(), data) == 0) {
@@ -87,7 +87,7 @@ bool write_players_FLASH(CONFIG& config)
     return result;
 }
 
-bool read_players_FLASH(CONFIG& config)
+bool read_players_FLASH(vector<MPD_PLAYER*>& players)
 {
     Preferences prefs;
     bool result = false;
@@ -110,7 +110,7 @@ bool read_players_FLASH(CONFIG& config)
                 mpd->player_name = strdup(parts[0].c_str());
                 mpd->player_ip = strdup(parts[1].c_str());
                 mpd->player_port = stoi(parts[2]);
-                config.mpd_players.push_back(mpd);
+                players.push_back(mpd);
                 tft_println(String(mpd->player_name) + " " + String(mpd->player_ip) + ":" + String(mpd->player_port));
             }
         }
@@ -125,7 +125,7 @@ bool read_players_FLASH(CONFIG& config)
     return result;
 }
 
-bool write_favourites_FLASH(CONFIG& config)
+bool write_favourites_FLASH(vector<FAVOURITE*>& favourites)
 {
     Preferences prefs;
     bool result = false;
@@ -137,7 +137,7 @@ bool write_favourites_FLASH(CONFIG& config)
     }
     result = true;
     int i = 0;
-    for (auto f : config.favourites) {
+    for (auto f : favourites) {
         string key = std::to_string(i);
         String data = String(f->fav_name) + "|" + String(f->fav_url);
         if (prefs.putString(key.c_str(), data) == 0) {
@@ -154,7 +154,7 @@ bool write_favourites_FLASH(CONFIG& config)
     return result;
 }
 
-bool read_favourites_FLASH(CONFIG& config)
+bool read_favourites_FLASH(vector<FAVOURITE*>& favourites)
 {
     Preferences prefs;
     bool result = false;
@@ -178,7 +178,7 @@ bool read_favourites_FLASH(CONFIG& config)
             FAVOURITE* f = new FAVOURITE();
             f->fav_name = strdup(parts[0].c_str());
             f->fav_url = strdup(parts[1].c_str());
-            config.favourites.push_back(f);
+            favourites.push_back(f);
         }
         ++i;
     }
@@ -186,7 +186,7 @@ bool read_favourites_FLASH(CONFIG& config)
         result = true;
     }
     prefs.end();
-    tft_println_highlight("Loaded " + String(config.favourites.size()) + " favourites");
+    tft_println_highlight("Loaded " + String(favourites.size()) + " favourites");
     return result;
 }
 
@@ -200,7 +200,7 @@ void write_current_player(uint16_t new_pl)
         return;
     }
     DPRINT("wprefs player: " + String(new_pl));
-    set_player(new_pl);
+    set_active_player(new_pl);
     bool result = prefs.putUShort("cur_mpd", new_pl) > 0;
     if (!result) {
         tft_println_error("cur_mpd prefs put error");
@@ -216,14 +216,14 @@ bool read_current_player()
         prefs.end();
         tft_println_highlight("No cur_mpd prefs!");
         write_current_player(0);
-        set_player(0);
+        set_active_player(0);
         return true;
     }
     bool result = false;
     int cur_mpd = prefs.getUShort("cur_mpd", 999);
     DPRINT("cur_mpd = " + String(cur_mpd));
     if (cur_mpd != 999) {
-        set_player(cur_mpd);
+        set_active_player(cur_mpd);
         result = true;
     }
     prefs.end();

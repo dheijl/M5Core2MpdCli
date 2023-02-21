@@ -20,6 +20,11 @@ using std::vector;
 #define DPRINT(x)
 #endif
 
+typedef struct wifi_acc_pt {
+    const char* ssid;
+    const char* psw;
+} WIFI_ACC_PT;
+
 typedef struct mpd_player {
     const char* player_name;
     const char* player_ip;
@@ -32,18 +37,13 @@ typedef struct favourite {
 } FAVOURITE;
 
 typedef struct config {
-    const char* ssid;
-    const char* psw;
+    WIFI_ACC_PT ap;
     uint16_t active_player;
     vector<MPD_PLAYER*> mpd_players;
     vector<FAVOURITE*> favourites;
 } CONFIG;
 
-void set_player(uint16_t new_pl);
-
-bool parse_wifi_file(File wifif);
-bool parse_players_file(File plf);
-bool parse_favs_file(File favf);
+void set_active_player(uint16_t new_pl);
 
 bool load_SD_config();
 bool load_FLASH_config();

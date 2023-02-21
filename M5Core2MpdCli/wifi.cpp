@@ -1,5 +1,4 @@
 #include "wifi.h"
-
 #include "tftfunctions.h"
 
 #include <M5Unified.h>
@@ -13,7 +12,7 @@ bool is_wifi_connected()
     return have_wifi;
 }
 
-bool start_wifi(CONFIG& config)
+bool start_wifi(WIFI_ACC_PT& ap)
 {
 
     if ((have_wifi) && (WiFi.status() == WL_CONNECTED)) {
@@ -25,7 +24,7 @@ bool start_wifi(CONFIG& config)
     WiFi.softAPdisconnect(true);
     tft_println("Connecting wifi...");
     WiFi.mode(WIFI_STA);
-    WiFi.begin(config.ssid, config.psw);
+    WiFi.begin(ap.ssid, ap.psw);
     have_wifi = false;
     long now = millis();
     while ((millis() - now) < 10000) {
