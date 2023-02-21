@@ -11,7 +11,8 @@
 
 #include "tftfunctions.h"
 
-using namespace std;
+using std::string;
+using std::vector;
 
 static const string MPD_CURRENTSONG = "currentsong\n";
 static const string MPD_STATUS = "status\n";

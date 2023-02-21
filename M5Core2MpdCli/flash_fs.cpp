@@ -1,9 +1,12 @@
 #include "flash_fs.h"
 
 #include "tftfunctions.h"
+#include "utils.h"
 
 #include <M5Unified.h>
 #include <Preferences.h>
+
+#include <string>
 
 const char* NVS_WIFI = "wifi";
 const char* NVS_PLAYERS = "players";
@@ -69,7 +72,7 @@ bool write_players_FLASH(CONFIG& config)
     int i = 0;
     for (auto pl : config.mpd_players) {
         string key = std::to_string(i);
-        String data = String(pl->player_name) + "|" + String(pl->player_ip) + "|" + String(to_string(pl->player_port).c_str());
+        String data = String(pl->player_name) + "|" + String(pl->player_ip) + "|" + String(std::to_string(pl->player_port).c_str());
         if (prefs.putString(key.c_str(), data) == 0) {
             result = false;
             tft_println_error("players prefs put error");

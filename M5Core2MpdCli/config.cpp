@@ -3,31 +3,20 @@
 #include "flash_fs.h"
 #include "sdcard_fs.h"
 #include "tftfunctions.h"
+#include "utils.h"
 
 static CONFIG config;
 
-vector<string> split(const string& s, char delim)
+void set_player(uint16_t new_pl)
 {
-    vector<string> result;
-    size_t start;
-    size_t end = 0;
-
-    while ((start = s.find_first_not_of(delim, end)) != std::string::npos) {
-        end = s.find(delim, start);
-        result.push_back(s.substr(start, end - start));
-    }
-    return result;
-}
-
-void set_player(uint16_t new_pl) {
-  config.active_player = new_pl;
+    config.active_player = new_pl;
 }
 
 bool load_SD_config()
 {
     tft_clear();
     tft_println("Check SD config");
-    if (read_wifi_SD(config) && read_players_SD(config) && read_favourites_SD(config)) {
+    if (read_wifi_SD() && read_players_SD() && read_favourites_SD()) {
         return true;
     } else {
         return false;
@@ -61,7 +50,7 @@ CONFIG& get_config()
     return config;
 }
 
-bool parse_wifi_file(File wifif, CONFIG& config)
+bool parse_wifi_file(File wifif)
 {
     bool result = false;
     tft_println("Loading WiFi ssid/psw");
@@ -83,7 +72,7 @@ bool parse_wifi_file(File wifif, CONFIG& config)
     return result;
 }
 
-bool parse_players_file(File plf, CONFIG& config)
+bool parse_players_file(File plf)
 {
     bool result = false;
     tft_println("Loading players:");
@@ -113,7 +102,7 @@ bool parse_players_file(File plf, CONFIG& config)
     return result;
 }
 
-bool parse_favs_file(File favf, CONFIG& config)
+bool parse_favs_file(File favf)
 {
     bool result = false;
     tft_println("Loading favourites");

@@ -47,6 +47,7 @@
         "system_error": "cpp",
         "xiosbase": "cpp",
         "unordered_set": "cpp",
-        "*.tpp": "cpp"
+        "*.tpp": "cpp",
+        "*.def": "cpp"
     }
 }

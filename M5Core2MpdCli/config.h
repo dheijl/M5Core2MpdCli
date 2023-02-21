@@ -7,10 +7,11 @@
 #include <Preferences.h>
 #include <SD.h>
 
-using namespace std;
+using std::string;
+using std::vector;
 
 #undef DEBUG
-//#define DEBUG
+// #define DEBUG
 #undef DEBUGMPDMESSAGES
 
 #ifdef DEBUG
@@ -38,13 +39,11 @@ typedef struct config {
     vector<FAVOURITE*> favourites;
 } CONFIG;
 
-vector<string> split(const string& s, char delim);
-
 void set_player(uint16_t new_pl);
 
-bool parse_wifi_file(File wifif, CONFIG& config);
-bool parse_players_file(File plf, CONFIG& config);
-bool parse_favs_file(File favf, CONFIG& config);
+bool parse_wifi_file(File wifif);
+bool parse_players_file(File plf);
+bool parse_favs_file(File favf);
 
 bool load_SD_config();
 bool load_FLASH_config();
