@@ -58,7 +58,7 @@ bool read_wifi_FLASH(WIFI_ACC_PT& ap)
     return true;
 }
 
-bool write_players_FLASH(vector<MPD_PLAYER*>& players)
+bool write_players_FLASH(PLAYERS& players)
 {
     Preferences prefs;
     bool result = false;
@@ -87,7 +87,7 @@ bool write_players_FLASH(vector<MPD_PLAYER*>& players)
     return result;
 }
 
-bool read_players_FLASH(vector<MPD_PLAYER*>& players)
+bool read_players_FLASH(PLAYERS& players)
 {
     Preferences prefs;
     bool result = false;
@@ -125,7 +125,7 @@ bool read_players_FLASH(vector<MPD_PLAYER*>& players)
     return result;
 }
 
-bool write_favourites_FLASH(vector<FAVOURITE*>& favourites)
+bool write_favourites_FLASH(FAVOURITES& favourites)
 {
     Preferences prefs;
     bool result = false;
@@ -154,7 +154,7 @@ bool write_favourites_FLASH(vector<FAVOURITE*>& favourites)
     return result;
 }
 
-bool read_favourites_FLASH(vector<FAVOURITE*>& favourites)
+bool read_favourites_FLASH(FAVOURITES& favourites)
 {
     Preferences prefs;
     bool result = false;

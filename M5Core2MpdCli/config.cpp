@@ -5,6 +5,10 @@
 #include "tftfunctions.h"
 #include "utils.h"
 
+static bool load_SD_config();
+static bool load_FLASH_config();
+static bool save_FLASH_config();
+
 static CONFIG config;
 
 ///
@@ -16,7 +20,7 @@ bool load_config()
         if (save_FLASH_config()) {
             tft_println("Config saved to FLASH");
         } else {
-          tft_println_error("Error saving to FLASH");
+            tft_println_error("Error saving to FLASH");
         }
     } else {
         if (!load_FLASH_config()) {

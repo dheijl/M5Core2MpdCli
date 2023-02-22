@@ -36,17 +36,16 @@ typedef struct favourite {
     const char* fav_url;
 } FAVOURITE;
 
+typedef vector<MPD_PLAYER*> PLAYERS;
+typedef vector<FAVOURITE*> FAVOURITES;
+
 typedef struct config {
-    WIFI_ACC_PT ap;
     uint16_t active_player;
-    vector<MPD_PLAYER*> mpd_players;
-    vector<FAVOURITE*> favourites;
+    WIFI_ACC_PT ap;
+    PLAYERS mpd_players;
+    FAVOURITES favourites;
 } CONFIG;
 
 bool load_config();
 CONFIG& get_config();
 void set_active_player(uint16_t new_pl);
-
-static bool load_SD_config();
-static bool load_FLASH_config();
-static bool save_FLASH_config();

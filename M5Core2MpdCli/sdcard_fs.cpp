@@ -10,6 +10,10 @@
 
 #define TFCARD_CS_PIN GPIO_NUM_4
 
+static bool parse_wifi_file(File wifif, WIFI_ACC_PT& ap);
+static bool parse_players_file(File plf, PLAYERS& players);
+static bool parse_favs_file(File favf, FAVOURITES& favourites);
+
 bool read_wifi_SD(WIFI_ACC_PT& ap)
 {
     bool result = false;
@@ -31,7 +35,7 @@ bool read_wifi_SD(WIFI_ACC_PT& ap)
     return result;
 }
 
-bool read_players_SD(vector<MPD_PLAYER*>& players)
+bool read_players_SD(PLAYERS& players)
 {
     bool result = false;
     if (!SD.begin(TFCARD_CS_PIN, SPI, 25000000)) {
@@ -51,7 +55,7 @@ bool read_players_SD(vector<MPD_PLAYER*>& players)
     return result;
 }
 
-bool read_favourites_SD(vector<FAVOURITE*>& favourites)
+bool read_favourites_SD(FAVOURITES& favourites)
 {
     bool result = false;
     if (!SD.begin(TFCARD_CS_PIN, SPI, 25000000)) {
@@ -93,7 +97,7 @@ static bool parse_wifi_file(File wifif, WIFI_ACC_PT& ap)
     return result;
 }
 
-static bool parse_players_file(File plf, vector<MPD_PLAYER*>& players)
+static bool parse_players_file(File plf, PLAYERS& players)
 {
     bool result = false;
     tft_println("Loading players:");
@@ -123,7 +127,7 @@ static bool parse_players_file(File plf, vector<MPD_PLAYER*>& players)
     return result;
 }
 
-static bool parse_favs_file(File favf, vector<FAVOURITE*>& favourites)
+static bool parse_favs_file(File favf, FAVOURITES& favourites)
 {
     bool result = false;
     tft_println("Loading favourites");

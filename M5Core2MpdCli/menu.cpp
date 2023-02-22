@@ -7,12 +7,14 @@
 
 #include <M5Unified.h>
 
+typedef vector<MENULINE*> MENU;
+
 static void display_menuline(const MENULINE* line, uint16_t color)
 {
     tft_write(line->x, line->y, color, String(line->text));
 }
 
-static int display_menu(const vector<MENULINE*> menu)
+static int display_menu(MENU& menu)
 {
     tft_clear();
     int selected = 0;
@@ -57,7 +59,7 @@ static void select_player()
 {
     auto config = get_config();
     auto players = config.mpd_players;
-    vector<MENULINE*> player_menu;
+    MENU player_menu;
     uint16_t x = 4;
     uint16_t pos = 40;
     for (auto p : players) {
@@ -83,7 +85,7 @@ static void select_player()
 
 static void select_favourite(int page)
 {
-    vector<MENULINE*> fav_menu;
+    MENU fav_menu;
     uint16_t x = 4;
     uint16_t pos = 15;
     int ifrom = page * 10;
@@ -131,7 +133,7 @@ void show_menu()
     int nfavs = config.favourites.size();
     int npages = (nfavs % 10) == 0 ? (nfavs / 10) : (nfavs / 10) + 1;
     npages = min(npages, 5);
-    vector<MENULINE*> main_menu;
+    MENU main_menu;
     uint16_t x = 4;
     uint16_t y = 20;
     for (int i = 0; i <= npages; i++) {
