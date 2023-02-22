@@ -258,7 +258,7 @@ public:
             }
             return true;
         } else {
-            tft_println("MPD Connection failed");
+            tft_println_error("MPD Connection failed");
             return false;
         }
     }

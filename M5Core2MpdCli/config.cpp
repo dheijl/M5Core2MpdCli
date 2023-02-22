@@ -15,6 +15,8 @@ bool load_config()
     if (load_SD_config()) {
         if (save_FLASH_config()) {
             tft_println("Config saved to FLASH");
+        } else {
+          tft_println_error("Error saving to FLASH");
         }
     } else {
         if (!load_FLASH_config()) {
