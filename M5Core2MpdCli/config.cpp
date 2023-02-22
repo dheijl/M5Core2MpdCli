@@ -7,12 +7,34 @@
 
 static CONFIG config;
 
+///
+/// try to load a config from SD or from flash
+///
+bool load_config()
+{
+    if (load_SD_config()) {
+        if (save_FLASH_config()) {
+            tft_println("Config saved to FLASH");
+        }
+    } else {
+        if (!load_FLASH_config()) {
+            return false;
+        }
+    }
+    return true;
+}
+
 void set_active_player(uint16_t new_pl)
 {
     config.active_player = new_pl;
 }
 
-bool load_SD_config()
+CONFIG& get_config()
+{
+    return config;
+}
+
+static bool load_SD_config()
 {
     tft_clear();
     tft_println("Check SD config");
@@ -25,7 +47,7 @@ bool load_SD_config()
     }
 }
 
-bool load_FLASH_config()
+static bool load_FLASH_config()
 {
     tft_println("Load FLASH config");
     if (read_wifi_FLASH(config.ap)
@@ -38,7 +60,7 @@ bool load_FLASH_config()
     }
 }
 
-bool save_FLASH_config()
+static bool save_FLASH_config()
 {
     tft_clear();
     tft_println("Save FLASH config");
@@ -49,9 +71,4 @@ bool save_FLASH_config()
     } else {
         return false;
     }
-}
-
-CONFIG& get_config()
-{
-    return config;
 }

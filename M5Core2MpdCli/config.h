@@ -43,9 +43,10 @@ typedef struct config {
     vector<FAVOURITE*> favourites;
 } CONFIG;
 
+bool load_config();
+CONFIG& get_config();
 void set_active_player(uint16_t new_pl);
 
-bool load_SD_config();
-bool load_FLASH_config();
-bool save_FLASH_config();
-CONFIG& get_config();
+static bool load_SD_config();
+static bool load_FLASH_config();
+static bool save_FLASH_config();

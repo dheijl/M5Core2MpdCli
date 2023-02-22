@@ -27,16 +27,12 @@ void setup()
     init_tft();
     // initialize battery
     init_battery();
-    // check for SD card with configuration
-    if (load_SD_config()) {
-        if (save_FLASH_config()) {
-            tft_println("Config saved to FLASH");
-        }
-    } else {
-        if (!load_FLASH_config()) {
-            tft_println("NO FLASH CONFIG!");
-            while (true) { }
-        }
+    // try to load configuration from flash or SD
+    while (!load_config()) {
+        tft_clear();
+        tft_println_error("Missing  config!!");
+        tft_println_highlight("Insert SD with config");
+        vTaskDelay(3000);
     }
     // start wifi
     if (start_wifi(get_config().ap)) {

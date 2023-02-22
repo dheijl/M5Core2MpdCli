@@ -10,6 +10,67 @@
 
 #define TFCARD_CS_PIN GPIO_NUM_4
 
+bool read_wifi_SD(WIFI_ACC_PT& ap)
+{
+    bool result = false;
+    if (!SD.begin(TFCARD_CS_PIN, SPI, 25000000)) {
+        SD.end();
+        return result;
+    }
+    tft_println_highlight("SD card present!");
+    vTaskDelay(50);
+    tft_println_highlight("Loading wifi");
+    File wifif = SD.open("/wifi.txt", FILE_READ);
+    if (wifif) {
+        result = parse_wifi_file(wifif, ap);
+    } else {
+        tft_println_error("error reading wifi.txt");
+        vTaskDelay(1000);
+    }
+    SD.end();
+    return result;
+}
+
+bool read_players_SD(vector<MPD_PLAYER*>& players)
+{
+    bool result = false;
+    if (!SD.begin(TFCARD_CS_PIN, SPI, 25000000)) {
+        SD.end();
+        return result;
+    }
+    tft_println_highlight("Loading players");
+    File plf = SD.open("/players.txt", FILE_READ);
+    if (plf) {
+        result = parse_players_file(plf, players);
+    } else {
+        tft_println_error("error reading players.txt");
+        vTaskDelay(1000);
+    }
+
+    SD.end();
+    return result;
+}
+
+bool read_favourites_SD(vector<FAVOURITE*>& favourites)
+{
+    bool result = false;
+    if (!SD.begin(TFCARD_CS_PIN, SPI, 25000000)) {
+        SD.end();
+        return result;
+    }
+    tft_println_highlight("Loading favourites");
+    File favf = SD.open("/favs.txt", FILE_READ);
+    if (favf) {
+        result = parse_favs_file(favf, favourites);
+    } else {
+        tft_println_error("error reading favs.txt");
+        vTaskDelay(1000);
+    }
+
+    SD.end();
+    return result;
+}
+
 static bool parse_wifi_file(File wifif, WIFI_ACC_PT& ap)
 {
     bool result = false;
@@ -88,66 +149,5 @@ static bool parse_favs_file(File favf, vector<FAVOURITE*>& favourites)
     } else {
         tft_println("No favourites!");
     }
-    return result;
-}
-
-bool read_wifi_SD(WIFI_ACC_PT& ap)
-{
-    bool result = false;
-    if (!SD.begin(TFCARD_CS_PIN, SPI, 25000000)) {
-        SD.end();
-        return result;
-    }
-    tft_println_highlight("SD card present!");
-    vTaskDelay(50);
-    tft_println_highlight("Loading wifi");
-    File wifif = SD.open("/wifi.txt", FILE_READ);
-    if (wifif) {
-        result = parse_wifi_file(wifif, ap);
-    } else {
-        tft_println_error("error reading wifi.txt");
-        vTaskDelay(1000);
-    }
-    SD.end();
-    return result;
-}
-
-bool read_players_SD(vector<MPD_PLAYER*>& players)
-{
-    bool result = false;
-    if (!SD.begin(TFCARD_CS_PIN, SPI, 25000000)) {
-        SD.end();
-        return result;
-    }
-    tft_println_highlight("Loading players");
-    File plf = SD.open("/players.txt", FILE_READ);
-    if (plf) {
-        result = parse_players_file(plf, players);
-    } else {
-        tft_println_error("error reading players.txt");
-        vTaskDelay(1000);
-    }
-
-    SD.end();
-    return result;
-}
-
-bool read_favourites_SD(vector<FAVOURITE*>& favourites)
-{
-    bool result = false;
-    if (!SD.begin(TFCARD_CS_PIN, SPI, 25000000)) {
-        SD.end();
-        return result;
-    }
-    tft_println_highlight("Loading favourites");
-    File favf = SD.open("/favs.txt", FILE_READ);
-    if (favf) {
-        result = parse_favs_file(favf, favourites);
-    } else {
-        tft_println_error("error reading favs.txt");
-        vTaskDelay(1000);
-    }
-
-    SD.end();
     return result;
 }
