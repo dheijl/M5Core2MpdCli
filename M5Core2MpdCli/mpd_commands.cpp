@@ -11,8 +11,8 @@ static MPD_PLAYER* get_mpd()
 {
     auto config = get_config();
     if (start_wifi(config.ap)) {
-        MPD_PLAYER* mpd = config.mpd_players[config.active_player];
-        tft_println("Player: " + String(config.active_player) + " " + String(mpd->player_name));
+        auto mpd = get_active_mpd();
+        tft_println("Player: " + String(mpd->player_name));
         return mpd;
     } else {
         tft_println_error("Can't connect.");

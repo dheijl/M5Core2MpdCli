@@ -190,7 +190,7 @@ bool read_favourites_FLASH(FAVOURITES& favourites)
     return result;
 }
 
-void write_current_player(uint16_t new_pl)
+void write_player_index(uint16_t new_pl)
 {
     Preferences prefs;
     if (!prefs.begin(NVS_CUR_MPD, false)) {
@@ -200,7 +200,7 @@ void write_current_player(uint16_t new_pl)
         return;
     }
     DPRINT("wprefs player: " + String(new_pl));
-    set_active_player(new_pl);
+    set_player_index(new_pl);
     bool result = prefs.putUShort("cur_mpd", new_pl) > 0;
     if (!result) {
         tft_println_error("cur_mpd prefs put error");
@@ -209,21 +209,21 @@ void write_current_player(uint16_t new_pl)
     prefs.end();
 }
 
-bool read_current_player()
+bool read_player_index()
 {
     Preferences prefs;
     if (!prefs.begin(NVS_CUR_MPD, true)) {
         prefs.end();
         tft_println_highlight("No cur_mpd prefs!");
-        write_current_player(0);
-        set_active_player(0);
+        write_player_index(0);
+        set_player_index(0);
         return true;
     }
     bool result = false;
     int cur_mpd = prefs.getUShort("cur_mpd", 999);
     DPRINT("cur_mpd = " + String(cur_mpd));
     if (cur_mpd != 999) {
-        set_active_player(cur_mpd);
+        set_player_index(cur_mpd);
         result = true;
     }
     prefs.end();

@@ -11,6 +11,11 @@ static bool save_FLASH_config();
 
 static CONFIG config;
 
+CONFIG& get_config()
+{
+    return config;
+}
+
 ///
 /// try to load a config from SD or from flash
 ///
@@ -30,14 +35,19 @@ bool load_config()
     return true;
 }
 
-void set_active_player(uint16_t new_pl)
+void set_player_index(uint16_t new_pl)
 {
-    config.active_player = new_pl;
+    config.player_index = new_pl;
 }
 
-CONFIG& get_config()
+uint16_t get_player_index()
 {
-    return config;
+    return config.player_index;
+}
+
+MPD_PLAYER* get_active_mpd()
+{
+    return config.mpd_players[config.player_index];
 }
 
 static bool load_SD_config()
@@ -59,7 +69,7 @@ static bool load_FLASH_config()
     if (read_wifi_FLASH(config.ap)
         && read_players_FLASH(config.mpd_players)
         && read_favourites_FLASH(config.favourites)
-        && read_current_player()) {
+        && read_player_index()) {
         return true;
     } else {
         return false;

@@ -40,7 +40,7 @@ typedef vector<MPD_PLAYER*> PLAYERS;
 typedef vector<FAVOURITE*> FAVOURITES;
 
 typedef struct config {
-    uint16_t active_player;
+    uint16_t player_index;
     WIFI_ACC_PT ap;
     PLAYERS mpd_players;
     FAVOURITES favourites;
@@ -48,4 +48,6 @@ typedef struct config {
 
 bool load_config();
 CONFIG& get_config();
-void set_active_player(uint16_t new_pl);
+void set_player_index(uint16_t new_pl);
+uint16_t get_player_index();
+MPD_PLAYER* get_active_mpd();

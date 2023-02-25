@@ -57,8 +57,7 @@ static int display_menu(MENU& menu)
 
 static void select_player()
 {
-    auto config = get_config();
-    auto players = config.mpd_players;
+    auto players = get_config().mpd_players;
     MENU player_menu;
     uint16_t x = 4;
     uint16_t pos = 40;
@@ -74,8 +73,8 @@ static void select_player()
         auto pl = players[selected]->player_name;
         tft_clear();
         tft_println("New player @" + String(pl));
-        config.active_player = (uint16_t)selected;
-        write_current_player(selected);
+        set_player_index((uint16_t)selected);
+        write_player_index(selected);
     }
     for (auto ml = player_menu.begin(); ml != player_menu.end(); ++ml) {
         delete *ml;
@@ -90,10 +89,10 @@ static void select_favourite(int page)
     uint16_t pos = 15;
     int ifrom = page * 10;
     int ito = ifrom + 10;
-    CONFIG& config = get_config();
+    auto favs = get_config().favourites;
     for (int i = ifrom; i < ito; i++) {
-        if (i < config.favourites.size()) {
-            MENULINE* m = new MENULINE { x, pos, config.favourites[i]->fav_name };
+        if (i < favs.size()) {
+            MENULINE* m = new MENULINE { x, pos, favs[i]->fav_name };
             pos += 20;
             fav_menu.push_back(m);
         }
@@ -103,8 +102,8 @@ static void select_favourite(int page)
     int selected = display_menu(fav_menu);
     if ((selected >= 0) && (selected < fav_menu.size() - 1)) {
         selected += ifrom;
-        auto url = config.favourites[selected]->fav_url;
-        auto name = config.favourites[selected]->fav_name;
+        auto url = favs[selected]->fav_url;
+        auto name = favs[selected]->fav_name;
         tft_clear();
         tft_println_highlight("Playing " + String(name));
         play_favourite(url);
@@ -129,8 +128,7 @@ void show_menu()
     };
 
     tft_clear();
-    CONFIG& config = get_config();
-    int nfavs = config.favourites.size();
+    int nfavs = get_config().favourites.size();
     int npages = (nfavs % 10) == 0 ? (nfavs / 10) : (nfavs / 10) + 1;
     npages = min(npages, 5);
     MENU main_menu;
