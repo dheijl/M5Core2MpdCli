@@ -78,7 +78,7 @@ bool read_favourites_SD(FAVOURITES& favourites)
 static bool parse_wifi_file(File wifif, WIFI_ACC_PT& ap)
 {
     bool result = false;
-    tft_println("Loading WiFi ssid/psw");
+    tft_println("Parsing WiFi ssid/psw");
     while (wifif.available()) {
         String line = wifif.readStringUntil('\n');
         line.trim();
@@ -100,7 +100,7 @@ static bool parse_wifi_file(File wifif, WIFI_ACC_PT& ap)
 static bool parse_players_file(File plf, PLAYERS& players)
 {
     bool result = false;
-    tft_println("Loading players:");
+    tft_println("Parsing players:");
     while (plf.available() && (players.size() <= 5)) { // max 5 players
         String line = plf.readStringUntil('\n');
         line.trim();
@@ -130,7 +130,7 @@ static bool parse_players_file(File plf, PLAYERS& players)
 static bool parse_favs_file(File favf, FAVOURITES& favourites)
 {
     bool result = false;
-    tft_println("Loading favourites");
+    tft_println("Parsing favourites");
     while (favf.available() && favourites.size() <= 50) { // max 50
         String line = favf.readStringUntil('\n');
         line.trim();
