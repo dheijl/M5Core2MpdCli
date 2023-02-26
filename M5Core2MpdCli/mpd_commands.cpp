@@ -34,8 +34,10 @@ void toggle_mpd_status()
 
 void show_mpd_status()
 {
-    int bat_level = M5.Power.getBatteryLevel();
-    tft_println("Battery: " + String(std::to_string(bat_level).c_str()));
+    auto bat_level = M5.Power.getBatteryLevel();
+    auto heap = ESP.getFreeHeap() / 1024;
+    auto psram = ESP.getFreePsram() / (1024 * 1024);
+    tft_println("B=" + String(bat_level) + "%,H=" + String(heap) + "K,PS=" + String(psram) + "M");
     if (start_wifi()) {
         auto player = get_active_mpd();
         show_player(player);

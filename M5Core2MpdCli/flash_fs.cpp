@@ -172,7 +172,6 @@ bool read_favourites_FLASH(FAVOURITES& favourites)
             break;
         }
         DPRINT(fav);
-        auto f = new FAVOURITE();
         vector<string> parts = split(string(fav.c_str()), '|');
         if (parts.size() == 2) {
             FAVOURITE* f = new FAVOURITE();
