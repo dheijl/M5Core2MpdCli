@@ -102,11 +102,9 @@ static void select_favourite(int page)
     int selected = display_menu(fav_menu);
     if ((selected >= 0) && (selected < fav_menu.size() - 1)) {
         selected += ifrom;
-        auto url = favs[selected]->fav_url;
-        auto name = favs[selected]->fav_name;
+        FAVOURITE& fav = *favs[selected];
         tft_clear();
-        tft_println_highlight("Playing " + String(name));
-        play_favourite(url);
+        play_favourite(fav);
     }
     for (auto ml = fav_menu.begin(); ml != fav_menu.end(); ++ml) {
         delete *ml;

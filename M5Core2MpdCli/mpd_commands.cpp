@@ -29,6 +29,7 @@ void toggle_mpd_status()
             }
             con.Disconnect();
         }
+        vTaskDelay(500);
         tft_clear();
     }
 }
@@ -52,18 +53,19 @@ void show_mpd_status()
     }
 }
 
-void play_favourite(const char* url)
+void play_favourite(const FAVOURITE& fav)
 {
     if (start_wifi()) {
         auto player = get_active_mpd();
         show_player(player);
+        tft_println_highlight("Play " + String(fav.fav_name));
         if (con.Connect(player.player_ip, player.player_port)) {
             con.Clear();
-            con.Add_Url(url);
+            con.Add_Url(fav.fav_url);
             con.Play();
             con.Disconnect();
         }
-        vTaskDelay(2000);
+        vTaskDelay(1500);
         tft_clear();
     }
 }
