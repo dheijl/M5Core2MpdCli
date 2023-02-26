@@ -267,6 +267,7 @@ public:
         tft_println("Disconnect MPD");
         Client.stop();
     }
+
     bool GetStatus()
     {
         Client.write(MPD_STATUS.c_str(), MPD_STATUS.length());

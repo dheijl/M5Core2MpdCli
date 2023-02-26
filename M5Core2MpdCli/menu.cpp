@@ -14,7 +14,7 @@ static void display_menuline(const MENULINE* line, uint16_t color)
     tft_write(line->x, line->y, color, String(line->text));
 }
 
-static int display_menu(MENU& menu)
+static int display_menu(const MENU& menu)
 {
     tft_clear();
     int selected = 0;

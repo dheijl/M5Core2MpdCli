@@ -13,7 +13,7 @@ const char* NVS_PLAYERS = "players";
 const char* NVS_FAVS = "favs";
 const char* NVS_CUR_MPD = "curmpd";
 
-bool write_wifi_FLASH(WIFI_ACC_PT& ap)
+bool write_wifi_FLASH(const WIFI_ACC_PT& ap)
 {
     Preferences prefs;
     bool result = false;
@@ -58,7 +58,7 @@ bool read_wifi_FLASH(WIFI_ACC_PT& ap)
     return true;
 }
 
-bool write_players_FLASH(PLAYERS& players)
+bool write_players_FLASH(const PLAYERS& players)
 {
     Preferences prefs;
     bool result = false;
@@ -125,7 +125,7 @@ bool read_players_FLASH(PLAYERS& players)
     return result;
 }
 
-bool write_favourites_FLASH(FAVOURITES& favourites)
+bool write_favourites_FLASH(const FAVOURITES& favourites)
 {
     Preferences prefs;
     bool result = false;
