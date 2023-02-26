@@ -7,6 +7,8 @@
 
 #include <M5Unified.h>
 
+static MpdConnection con;
+
 static void show_player(MPD_PLAYER& player)
 {
     tft_println("Player: " + String(player.player_name));
@@ -17,7 +19,6 @@ void toggle_mpd_status()
     if (start_wifi()) {
         auto player = get_active_mpd();
         show_player(player);
-        MpdConnection con;
         if (con.Connect(player.player_ip, player.player_port)) {
             if (con.IsPlaying()) {
                 tft_println_highlight("Stop playing");
@@ -41,7 +42,6 @@ void show_mpd_status()
     if (start_wifi()) {
         auto player = get_active_mpd();
         show_player(player);
-        MpdConnection con;
         if (con.Connect(player.player_ip, player.player_port)) {
             con.GetStatus();
             con.GetCurrentSong();
@@ -57,11 +57,11 @@ void play_favourite(const char* url)
     if (start_wifi()) {
         auto player = get_active_mpd();
         show_player(player);
-        MpdConnection con;
         if (con.Connect(player.player_ip, player.player_port)) {
             con.Clear();
             con.Add_Url(url);
             con.Play();
+            con.Disconnect();
         }
         vTaskDelay(2000);
         tft_clear();
