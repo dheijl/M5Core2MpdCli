@@ -7,30 +7,18 @@
 
 #include <M5Unified.h>
 
-static MPD_PLAYER* get_mpd()
+static void show_player(MPD_PLAYER& player)
 {
-    auto config = get_config();
-    if (start_wifi(config.ap)) {
-        auto mpd = get_active_mpd();
-        tft_println("Player: " + String(mpd->player_name));
-        return mpd;
-    } else {
-        tft_println_error("Can't connect.");
-        return NULL;
-    }
-}
-
-static void disconnect_mpd()
-{
-    tft_clear();
+    tft_println("Player: " + String(player.player_name));
 }
 
 void toggle_mpd_status()
 {
-    auto player = get_mpd();
-    if (player != NULL) {
+    if (start_wifi()) {
+        auto player = get_active_mpd();
+        show_player(player);
         MpdConnection con;
-        if (con.Connect(player->player_ip, player->player_port)) {
+        if (con.Connect(player.player_ip, player.player_port)) {
             if (con.IsPlaying()) {
                 tft_println_highlight("Stop playing");
                 con.Stop();
@@ -40,7 +28,7 @@ void toggle_mpd_status()
             }
             con.Disconnect();
         }
-        disconnect_mpd();
+        tft_clear();
     }
 }
 
@@ -48,30 +36,32 @@ void show_mpd_status()
 {
     int bat_level = M5.Power.getBatteryLevel();
     tft_println("Battery: " + String(std::to_string(bat_level).c_str()));
-    auto player = get_mpd();
-    if (player != NULL) {
+    if (start_wifi()) {
+        auto player = get_active_mpd();
+        show_player(player);
         MpdConnection con;
-        if (con.Connect(player->player_ip, player->player_port)) {
+        if (con.Connect(player.player_ip, player.player_port)) {
             con.GetStatus();
             con.GetCurrentSong();
             con.Disconnect();
         }
         vTaskDelay(3000);
-        disconnect_mpd();
+        tft_clear();
     }
 }
 
 void play_favourite(const char* url)
 {
-    auto player = get_mpd();
-    if (player != NULL) {
+    if (start_wifi()) {
+        auto player = get_active_mpd();
+        show_player(player);
         MpdConnection con;
-        if (con.Connect(player->player_ip, player->player_port)) {
+        if (con.Connect(player.player_ip, player.player_port)) {
             con.Clear();
             con.Add_Url(url);
             con.Play();
         }
         vTaskDelay(2000);
-        disconnect_mpd();
+        tft_clear();
     }
 }

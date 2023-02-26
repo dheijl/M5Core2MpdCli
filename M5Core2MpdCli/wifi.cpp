@@ -12,7 +12,7 @@ bool is_wifi_connected()
     return have_wifi;
 }
 
-bool start_wifi(WIFI_ACC_PT& ap)
+bool start_wifi()
 {
 
     if ((have_wifi) && (WiFi.status() == WL_CONNECTED)) {
@@ -24,6 +24,7 @@ bool start_wifi(WIFI_ACC_PT& ap)
     WiFi.softAPdisconnect(true);
     tft_println("Connecting wifi...");
     WiFi.mode(WIFI_STA);
+    auto ap = get_config().ap;
     WiFi.begin(ap.ssid, ap.psw);
     have_wifi = false;
     long now = millis();

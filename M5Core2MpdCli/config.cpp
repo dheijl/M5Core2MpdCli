@@ -45,9 +45,9 @@ uint16_t get_player_index()
     return config.player_index;
 }
 
-MPD_PLAYER* get_active_mpd()
+MPD_PLAYER& get_active_mpd()
 {
-    return config.mpd_players[config.player_index];
+    return *config.mpd_players[config.player_index];
 }
 
 static bool load_SD_config()
