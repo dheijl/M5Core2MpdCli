@@ -49,5 +49,4 @@ typedef struct config {
 bool load_config();
 CONFIG& get_config();
 void set_player_index(uint16_t new_pl);
-uint16_t get_player_index();
-MPD_PLAYER& get_active_mpd();
+const MPD_PLAYER& get_active_mpd();

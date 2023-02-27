@@ -40,12 +40,7 @@ void set_player_index(uint16_t new_pl)
     config.player_index = new_pl;
 }
 
-uint16_t get_player_index()
-{
-    return config.player_index;
-}
-
-MPD_PLAYER& get_active_mpd()
+const MPD_PLAYER& get_active_mpd()
 {
     return *config.mpd_players[config.player_index];
 }
