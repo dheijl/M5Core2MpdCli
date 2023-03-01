@@ -73,5 +73,5 @@ void loop()
             M5.Power.powerOff();
         }
     }
-    vTaskDelay(1);
+    vTaskDelay(5);
 }

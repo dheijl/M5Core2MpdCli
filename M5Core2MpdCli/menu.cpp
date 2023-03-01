@@ -32,7 +32,7 @@ static int display_menu(const MENU& menu)
     int selected = 0;
     bool repaint = true;
     while (true) {
-        vTaskDelay(1);
+        vTaskDelay(5);
         if (repaint) {
             repaint = false;
             draw(menu, selected);
