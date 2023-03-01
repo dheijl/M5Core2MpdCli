@@ -8,7 +8,9 @@ The joystick function of the Seeed Wio Terminal is replaced by the 3 on-screen t
 
 ## Operation
 
-Pushing Key_A will display the current MPD status (play/stop, current file, current artist/song), or move the selection UP in the menu
+Powering on or pushing Key_A will display the current MPD status (play/stop, current file, current artist/song), or move the selection UP in the menu
+
+![01](https://user-images.githubusercontent.com/2384545/222172841-3ff9ac18-f94e-4c4e-9cc0-97e544568470.jpg)
 
 Pushing KEY_B will show the menu, or select a menu option.
 
@@ -20,6 +22,10 @@ The menu system that allows you to:
 
 - select a player from a list of players (max 5 players supported)
 - select a favourite page from a list of favourites pages (max 50 favourites, so max 5 pages of 10 favourites each). You can then select one of the 10 favourites in that page.
+
+![02](https://user-images.githubusercontent.com/2384545/222172863-71fc3b46-54e5-4cc8-a4c9-092ba327fe20.jpg)
+
+![03](https://user-images.githubusercontent.com/2384545/222172920-af360d83-22eb-4cef-9bcc-0dad5d4a0aec.jpg)
 
 ## configuration
 
