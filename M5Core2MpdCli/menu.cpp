@@ -9,9 +9,21 @@
 
 typedef vector<MENULINE*> MENU;
 
-static void display_menuline(const MENULINE* line, uint16_t color)
+static void draw_menuline(const MENULINE* line, uint16_t color)
 {
     tft_write(line->x, line->y, color, String(line->text));
+}
+
+static void draw(const MENU& menu, const int selected)
+{
+    int i = 0;
+    for (auto l : menu) {
+        if (i++ == selected) {
+            draw_menuline(l, TFT_GREENYELLOW);
+        } else {
+            draw_menuline(l, TFT_WHITE);
+        }
+    }
 }
 
 static int display_menu(const MENU& menu)
@@ -20,16 +32,10 @@ static int display_menu(const MENU& menu)
     int selected = 0;
     bool repaint = true;
     while (true) {
+        vTaskDelay(1);
         if (repaint) {
             repaint = false;
-            int i = 0;
-            for (auto l : menu) {
-                if (i++ == selected) {
-                    display_menuline(l, TFT_GREENYELLOW);
-                } else {
-                    display_menuline(l, TFT_WHITE);
-                }
-            }
+            draw(menu, selected);
         }
         M5.update();
         if (M5.BtnC.wasPressed()) { // up
@@ -51,7 +57,25 @@ static int display_menu(const MENU& menu)
         if (M5.BtnB.wasPressed()) { // select
             return selected;
         }
-        vTaskDelay(1);
+        // select with touch
+        M5.update();
+        auto count = M5.Touch.getCount();
+        if (count > 0) {
+            for (uint i = 0; i < count; ++i) {
+                auto det = M5.Touch.getDetail(i);
+                if (det.isPressed()) {
+                    int sel = 0;
+                    for (auto ml : menu) {
+                        if ((det.y >= ml->y) && (det.y <= ml->y + 12)) {
+                            selected = sel;
+                            repaint = true;
+                            continue;
+                        }
+                        ++sel;
+                    }
+                }
+            }
+        }
     }
 }
 
