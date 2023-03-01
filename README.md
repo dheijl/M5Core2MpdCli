@@ -14,6 +14,8 @@ Pushing KEY_B will show the menu, or select a menu option.
 
 Pushing KEY_C acts as a toggle for starting/stopping the MPD player, or move the selection DOWN in the menu.
 
+You can also use the touch screen to highlight a menu option, confirm the selection with KEY_B.
+
 The menu system that allows you to:
 
 - select a player from a list of players (max 5 players supported)
@@ -33,14 +35,11 @@ See the [example_config](https://github.com/dheijl/M5Core2MpdCli/tree/main/examp
 
 If present these files are read in and copied to internal ESP32 NVS preferences in flash. At subsequents power-ons this flash config is used (unless an SD card is present with a new config).
 
-After this initialization the WiFi connection is established, and the _status/current file or url/currentsong_ of the active MPD player is shown for a couple of seconds. The wifi connection is kept active for 5 seconds after the last button press (except battery status as it does not need wifi). The blue LED is ON while the WiFi connection is established, and OFF when there is currently no WiFi connection. The WiFi connection will be re-established as needed, and dropped after the 5 second time-out.
-The TFT screen is always kept disabled except for some seconds when something is being shown after power-on or a button press, or while a button is kept pressed
-down.
+After this initialization the WiFi connection is established, and the _status/current file or url/currentsong_ of the active MPD player is shown for a couple of seconds. The screen is turned off immediately to conserve battery power. The wifi connection is kept active for 10 seconds after the last button press (except battery status as it does not need wifi). The green LED is ON while the WiFi connection is established, and OFF when there is currently no WiFi connection. The WiFi connection will be re-established as needed, and dropped after the 10 second time-out.
+If the battery is not charging the power is also turned off automatically after the wifi is turned off, as powering up the device, loading the config from flash and establishing the wifi connection hardly takes a second.
 
-The favourites are all internet radio stations in my use case. I haven't tried anything else.
+My favourites are all internet radio stations in my use case. I haven't tried anything else.
 
 ## GUI
 
 The GUI is extremely basic, with this display one could do much better. But I hate GUI design, and it gives me the information I need. Feel free to make pull resuests if GUI is your thing...
-
-WIP: add touch navigation and selection to the menu.
