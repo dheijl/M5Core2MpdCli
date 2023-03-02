@@ -4,7 +4,7 @@ Simple MPD client (Arduino) with the [M5stack M5Core2](https://docs.m5stack.com/
 
 It is the M5Core2 version of my no longer maintained [WiotMpdcli project](https://github.com/dheijl/WiotMpdcli), with similar function and use.
 
-The joystick function of the Seeed Wio Terminal is replaced by the 3 on-screen touch buttons (up/select/down), and the menu is activated with the middle (select) button.
+The joystick function of the Seeed Wio Terminal is replaced by the 3 on-screen touch buttons (up/select/down), and the menu is activated with the middle (KEY_B, select) button. Inside menus you can slide your finger over the touchscreen to highlight a menu selection instead of moving the selection with up(KEY_A)/down(KEY_C).
 
 ## Operation
 
