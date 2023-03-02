@@ -39,14 +39,23 @@ typedef struct favourite {
 typedef vector<MPD_PLAYER*> PLAYERS;
 typedef vector<FAVOURITE*> FAVOURITES;
 
-typedef struct config {
+class Configuration {
+private:
     uint16_t player_index;
     WIFI_ACC_PT ap;
     PLAYERS mpd_players;
     FAVOURITES favourites;
-} CONFIG;
+    bool load_SD_config();
+    bool load_FLASH_config();
+    bool save_FLASH_config();
 
-bool load_config();
-CONFIG& get_config();
-void set_player_index(uint16_t new_pl);
-const MPD_PLAYER& get_active_mpd();
+public:
+    const WIFI_ACC_PT& getAP();
+    const PLAYERS& getPlayers();
+    const FAVOURITES& getFavourites();
+    bool load_config();
+    void set_player_index(uint16_t new_pl);
+    const MPD_PLAYER& get_active_mpd();
+};
+
+extern Configuration& Config;

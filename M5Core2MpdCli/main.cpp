@@ -3,8 +3,6 @@
 
 #include "config.h"
 
-#include "battery.h"
-#include "buttons.h"
 #include "debug.h"
 #include "menu.h"
 #include "mpd_commands.h"
@@ -21,14 +19,10 @@ void setup()
 
     // init debug code
     init_debug();
-    // initialize buttons
-    init_buttons();
     // Initialize TFT
     init_tft();
-    // initialize battery
-    init_battery();
     // try to load configuration from flash or SD
-    while (!load_config()) {
+    while (!Config.load_config()) {
         tft_clear();
         tft_println_error("Missing  config!!");
         tft_println_highlight("Insert SD with config");

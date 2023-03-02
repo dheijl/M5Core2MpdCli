@@ -17,7 +17,7 @@ static void show_player(MPD_PLAYER& player)
 void toggle_mpd_status()
 {
     if (start_wifi()) {
-        auto player = get_active_mpd();
+        auto player = Config.get_active_mpd();
         show_player(player);
         if (con.Connect(player.player_ip, player.player_port)) {
             if (con.IsPlaying()) {
@@ -41,7 +41,7 @@ void show_mpd_status()
     auto psram = ESP.getFreePsram() / (1024 * 1024);
     tft_println("B=" + String(bat_level) + "%,H=" + String(heap) + "K,PS=" + String(psram) + "M");
     if (start_wifi()) {
-        auto player = get_active_mpd();
+        auto player = Config.get_active_mpd();
         show_player(player);
         if (con.Connect(player.player_ip, player.player_port)) {
             con.GetStatus();
@@ -56,7 +56,7 @@ void show_mpd_status()
 void play_favourite(const FAVOURITE& fav)
 {
     if (start_wifi()) {
-        auto player = get_active_mpd();
+        auto player = Config.get_active_mpd();
         show_player(player);
         tft_println_highlight("Play " + String(fav.fav_name));
         if (con.Connect(player.player_ip, player.player_port)) {

@@ -199,7 +199,7 @@ void write_player_index(uint16_t new_pl)
         return;
     }
     DPRINT("wprefs player: " + String(new_pl));
-    set_player_index(new_pl);
+    Config.set_player_index(new_pl);
     bool result = prefs.putUShort("cur_mpd", new_pl) > 0;
     if (!result) {
         tft_println_error("cur_mpd prefs put error");
@@ -215,14 +215,14 @@ bool read_player_index()
         prefs.end();
         tft_println_highlight("No cur_mpd prefs!");
         write_player_index(0);
-        set_player_index(0);
+        Config.set_player_index(0);
         return true;
     }
     bool result = false;
     int cur_mpd = prefs.getUShort("cur_mpd", 999);
     DPRINT("cur_mpd = " + String(cur_mpd));
     if (cur_mpd != 999) {
-        set_player_index(cur_mpd);
+        Config.set_player_index(cur_mpd);
         result = true;
     }
     prefs.end();

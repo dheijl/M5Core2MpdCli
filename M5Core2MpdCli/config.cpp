@@ -5,65 +5,73 @@
 #include "tftfunctions.h"
 #include "utils.h"
 
-static bool load_SD_config();
-static bool load_FLASH_config();
-static bool save_FLASH_config();
+static Configuration config;
 
-static CONFIG config;
-
-CONFIG& get_config()
-{
-    return config;
-}
+Configuration& Config = config;
 
 ///
 /// try to load a config from SD or from flash
 ///
-bool load_config()
+bool Configuration::load_config()
 {
-    if (load_SD_config()) {
-        if (save_FLASH_config()) {
-            tft_println("Config saved to FLASH");
+    if (this->load_SD_config()) {
+        if (this->save_FLASH_config()) {
+            tft_println("Configuration saved to FLASH");
         } else {
             tft_println_error("Error saving to FLASH");
         }
     } else {
-        if (!load_FLASH_config()) {
+        if (!this->load_FLASH_config()) {
             return false;
         }
     }
     return true;
 }
 
-void set_player_index(uint16_t new_pl)
+void Configuration::set_player_index(uint16_t new_pl)
 {
-    config.player_index = new_pl;
+    this->player_index = new_pl;
 }
 
-const MPD_PLAYER& get_active_mpd()
+const MPD_PLAYER& Configuration::get_active_mpd()
 {
-    return *config.mpd_players[config.player_index];
+    return *(this->mpd_players[config.player_index]);
 }
 
-static bool load_SD_config()
+const WIFI_ACC_PT& Configuration::getAP()
+{
+    return this->ap;
+}
+
+const PLAYERS& Configuration::getPlayers()
+{
+    return this->mpd_players;
+}
+
+const FAVOURITES& Configuration::getFavourites()
+{
+    return this->favourites;
+}
+
+bool Configuration::load_SD_config()
 {
     tft_clear();
     tft_println("Check SD config");
-    if (read_wifi_SD(config.ap)
-        && read_players_SD(config.mpd_players)
-        && read_favourites_SD(config.favourites)) {
+    if (read_wifi_SD(this->ap)
+        && read_players_SD(this->mpd_players)
+        && read_favourites_SD(this->favourites)) {
         return true;
     } else {
         return false;
     }
 }
 
-static bool load_FLASH_config()
+bool Configuration::load_FLASH_config()
 {
     tft_println("Load FLASH config");
-    if (read_wifi_FLASH(config.ap)
-        && read_players_FLASH(config.mpd_players)
-        && read_favourites_FLASH(config.favourites)
+    if (read_wifi_FLASH(this->ap)
+        && read_players_FLASH(this->mpd_players)
+        && read_favourites_FLASH(this->favourites)
         && read_player_index()) {
         return true;
     } else {
@@ -71,13 +79,13 @@ static bool load_FLASH_config()
     }
 }
 
-static bool save_FLASH_config()
+bool Configuration::save_FLASH_config()
 {
     tft_clear();
     tft_println("Save FLASH config");
-    if (write_wifi_FLASH(config.ap)
-        && write_players_FLASH(config.mpd_players)
-        && write_favourites_FLASH(config.favourites)) {
+    if (write_wifi_FLASH(this->ap)
+        && write_players_FLASH(this->mpd_players)
+        && write_favourites_FLASH(this->favourites)) {
         return true;
     } else {
         return false;

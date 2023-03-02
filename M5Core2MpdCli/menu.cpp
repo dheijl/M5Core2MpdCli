@@ -81,7 +81,7 @@ static int display_menu(const MENU& menu)
 
 static void select_player()
 {
-    PLAYERS& players = get_config().mpd_players;
+    auto players = Config.getPlayers();
     MENU player_menu;
     uint16_t x = 4;
     uint16_t pos = 40;
@@ -97,7 +97,7 @@ static void select_player()
         auto pl = players[selected]->player_name;
         tft_clear();
         tft_println("New player @" + String(pl));
-        set_player_index((uint16_t)selected);
+        Config.set_player_index((uint16_t)selected);
         write_player_index(selected);
     }
     for (auto ml = player_menu.begin(); ml != player_menu.end(); ++ml) {
@@ -108,12 +108,12 @@ static void select_player()
 
 static void select_favourite(int page)
 {
+    auto favs = Config.getFavourites();
     MENU fav_menu;
     uint16_t x = 4;
     uint16_t pos = 15;
     int ifrom = page * 10;
     int ito = ifrom + 10;
-    FAVOURITES& favs = get_config().favourites;
     for (int i = ifrom; i < ito; i++) {
         if (i < favs.size()) {
             MENULINE* m = new MENULINE { x, pos, favs[i]->fav_name };
@@ -150,7 +150,7 @@ void show_menu()
     };
 
     tft_clear();
-    int nfavs = get_config().favourites.size();
+    int nfavs = Config.getFavourites().size();
     int npages = (nfavs % 10) == 0 ? (nfavs / 10) : (nfavs / 10) + 1;
     npages = min(npages, 5);
     MENU main_menu;
