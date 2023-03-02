@@ -1,6 +1,6 @@
 # M5Core2MpdCli
 
-Simple MPD client (Arduino) with the [M5stack M5Core2](https://docs.m5stack.com/en/core/core2).
+Simple MPD client (Arduino) with the [M5stack M5Core2](https://docs.m5stack.com/en/core/core2), MIT licensed.
 
 It is the M5Core2 version of my no longer maintained [WiotMpdcli project](https://github.com/dheijl/WiotMpdcli), with similar function and use.
 
