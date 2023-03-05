@@ -40,6 +40,8 @@ static const string MPD_STOP = "stop\n";
 static const string MPD_CLEAR = "clear\n";
 static const string MPD_ADD = "add {}\n";
 
+extern WiFiClient& Client;
+
 enum MpdResponseType {
     MpdOKType,
     MpdACKType,
@@ -238,7 +240,6 @@ public:
 
 class MpdConnection {
 private:
-    WiFiClient Client;
     string read_data()
     {
         int n = 5000;
