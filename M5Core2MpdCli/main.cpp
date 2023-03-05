@@ -47,7 +47,9 @@ void setup()
         tft_println_highlight("Insert SD with config");
         vTaskDelay(3000);
     }
-    // start wifi
+    // Create menus based on config
+    CreateMenus();
+    // start wifi and show current MPD status of actiev player
     if (start_wifi()) {
         tft_clear();
         show_mpd_status();
@@ -71,7 +73,7 @@ void loop()
     }
     if (M5.BtnB.wasPressed()) {
         start_wifi();
-        show_menu();
+        ShowMenu();
         wifi_started = millis();
     }
     if (M5.BtnC.wasPressed()) {
