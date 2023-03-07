@@ -48,6 +48,7 @@
         "xiosbase": "cpp",
         "unordered_set": "cpp",
         "*.tpp": "cpp",
-        "*.def": "cpp"
+        "*.def": "cpp",
+        "xlocinfo": "cpp"
     }
 }

@@ -101,8 +101,8 @@ static bool parse_wifi_file(File wifif, WIFI_ACC_PT& ap)
     while (wifif.available()) {
         String line = wifif.readStringUntil('\n');
         line.trim();
+        DPRINT(line);
         string wifi = line.c_str();
-        DPRINT(wifi.c_str());
         if (wifi.length() > 1) {
             vector<string> parts = split(wifi, '|');
             if (parts.size() == 2) {
@@ -123,8 +123,8 @@ static bool parse_players_file(File plf, PLAYERS& players)
     while (plf.available() && (players.size() <= 5)) { // max 5 players
         String line = plf.readStringUntil('\n');
         line.trim();
+        DPRINT(line);
         string pl = line.c_str();
-        DPRINT(pl.c_str());
         if (pl.length() > 1) {
             vector<string> parts = split(pl, '|');
             if (parts.size() == 3) {
@@ -153,8 +153,8 @@ static bool parse_favs_file(File favf, FAVOURITES& favourites)
     while (favf.available() && favourites.size() <= 50) { // max 50
         String line = favf.readStringUntil('\n');
         line.trim();
+        DPRINT(line);
         string fav = line.c_str();
-        DPRINT(fav.c_str());
         if (fav.length() > 1) {
             vector<string> parts = split(fav, '|');
             if (parts.size() == 2) {
