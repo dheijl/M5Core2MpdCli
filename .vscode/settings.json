@@ -49,6 +49,7 @@
         "unordered_set": "cpp",
         "*.tpp": "cpp",
         "*.def": "cpp",
-        "xlocinfo": "cpp"
+        "xlocinfo": "cpp",
+        "set": "cpp"
     }
 }

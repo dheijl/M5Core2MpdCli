@@ -64,6 +64,10 @@ public:
     {
         return this->lines.size();
     }
+    void reserve(size_t n)
+    {
+        this->lines.reserve(n);
+    }
     void add_line(const char* line)
     {
         this->lines.push_back(new MENULINE { this->x, this->y, line });
