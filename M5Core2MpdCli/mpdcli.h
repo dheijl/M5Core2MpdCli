@@ -253,10 +253,13 @@ private:
             return string();
         }
         uint8_t buf[4096];
-        int bufsize = sizeof(buf) / sizeof(uint8_t);
         n = Client.read(buf, sizeof(buf));
-        string data((char*)&buf[0], n);
-        return data;
+        if (n > 0) {
+            string data((char*)&buf[0], n);
+            return data;
+        } else {
+            return string("");
+        }
     }
 
 protected:
