@@ -87,6 +87,7 @@ bool write_players_FLASH(const PLAYERS& players)
         vTaskDelay(2000);
         return result;
     }
+    prefs.clear();
     result = true;
     int i = 0;
     for (auto pl : players) {
@@ -154,6 +155,7 @@ bool write_favourites_FLASH(const FAVOURITES& favourites)
         vTaskDelay(2000);
         return result;
     }
+    prefs.clear();
     result = true;
     int i = 0;
     for (auto f : favourites) {
