@@ -21,6 +21,14 @@
 
 #include "config.h"
 
-bool read_wifi_SD(WIFI_ACC_PT& ap);
-bool read_players_SD(PLAYERS& players);
-bool read_favourites_SD(FAVOURITES& favourites);
+class SD_Config {
+private:
+    static bool parse_wifi_file(File wifif, WIFI_ACC_PT& ap);
+    static bool parse_players_file(File plf, PLAYERS& players);
+    static bool parse_favs_file(File favf, FAVOURITES& favourites);
+
+public:
+    static bool read_wifi(WIFI_ACC_PT& ap);
+    static bool read_players(PLAYERS& players);
+    static bool read_favourites(FAVOURITES& favourites);
+};

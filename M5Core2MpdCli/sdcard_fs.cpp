@@ -29,11 +29,7 @@
 
 #define TFCARD_CS_PIN GPIO_NUM_4
 
-static bool parse_wifi_file(File wifif, WIFI_ACC_PT& ap);
-static bool parse_players_file(File plf, PLAYERS& players);
-static bool parse_favs_file(File favf, FAVOURITES& favourites);
-
-bool read_wifi_SD(WIFI_ACC_PT& ap)
+bool SD_Config::read_wifi(WIFI_ACC_PT& ap)
 {
     bool result = false;
     if (!SD.begin(TFCARD_CS_PIN, SPI, 25000000)) {
@@ -54,7 +50,7 @@ bool read_wifi_SD(WIFI_ACC_PT& ap)
     return result;
 }
 
-bool read_players_SD(PLAYERS& players)
+bool SD_Config::read_players(PLAYERS& players)
 {
     bool result = false;
     if (!SD.begin(TFCARD_CS_PIN, SPI, 25000000)) {
@@ -74,7 +70,7 @@ bool read_players_SD(PLAYERS& players)
     return result;
 }
 
-bool read_favourites_SD(FAVOURITES& favourites)
+bool SD_Config::read_favourites(FAVOURITES& favourites)
 {
     bool result = false;
     if (!SD.begin(TFCARD_CS_PIN, SPI, 25000000)) {
@@ -94,7 +90,7 @@ bool read_favourites_SD(FAVOURITES& favourites)
     return result;
 }
 
-static bool parse_wifi_file(File wifif, WIFI_ACC_PT& ap)
+bool SD_Config::parse_wifi_file(File wifif, WIFI_ACC_PT& ap)
 {
     bool result = false;
     tft_println("Parsing WiFi ssid/psw");
@@ -116,7 +112,7 @@ static bool parse_wifi_file(File wifif, WIFI_ACC_PT& ap)
     return result;
 }
 
-static bool parse_players_file(File plf, PLAYERS& players)
+bool SD_Config::parse_players_file(File plf, PLAYERS& players)
 {
     bool result = false;
     tft_println("Parsing players:");
@@ -146,7 +142,7 @@ static bool parse_players_file(File plf, PLAYERS& players)
     return result;
 }
 
-static bool parse_favs_file(File favf, FAVOURITES& favourites)
+bool SD_Config::parse_favs_file(File favf, FAVOURITES& favourites)
 {
     bool result = false;
     tft_println("Parsing favourites");

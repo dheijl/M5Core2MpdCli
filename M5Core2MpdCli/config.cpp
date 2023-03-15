@@ -76,9 +76,9 @@ bool Configuration::load_SD_config()
 {
     tft_clear();
     tft_println("Check SD config");
-    if (read_wifi_SD(this->ap)
-        && read_players_SD(this->mpd_players)
-        && read_favourites_SD(this->favourites)) {
+    if (SD_Config::read_wifi(this->ap)
+        && SD_Config::read_players(this->mpd_players)
+        && SD_Config::read_favourites(this->favourites)) {
         return true;
     } else {
         return false;
