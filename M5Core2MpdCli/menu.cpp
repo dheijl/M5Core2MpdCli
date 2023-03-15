@@ -45,7 +45,7 @@ void Menu::select_favourite(int page)
         selected = (page * 10) + selected;
         FAVOURITE& fav = *favs[selected];
         tft_clear();
-        play_favourite(fav);
+        mpd.play_favourite(fav);
     }
 }
 

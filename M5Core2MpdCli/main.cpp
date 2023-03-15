@@ -53,7 +53,7 @@ void setup()
     // start wifi and show current MPD status of actiev player
     if (start_wifi()) {
         tft_clear();
-        show_mpd_status();
+        mpd.show_mpd_status();
         wifi_started = millis();
     } else {
         tft_println("Connection FAIL!");
@@ -69,7 +69,7 @@ void loop()
     M5.update();
     if (M5.BtnA.wasPressed()) {
         start_wifi();
-        show_mpd_status();
+        mpd.show_mpd_status();
         wifi_started = millis();
     }
     if (M5.BtnB.wasPressed()) {
@@ -79,7 +79,7 @@ void loop()
     }
     if (M5.BtnC.wasPressed()) {
         start_wifi();
-        toggle_mpd_status();
+        mpd.toggle_mpd_status();
         wifi_started = millis();
     }
     tft_sleep();

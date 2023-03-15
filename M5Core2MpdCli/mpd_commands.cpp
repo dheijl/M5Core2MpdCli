@@ -20,40 +20,40 @@
 #include "config.h"
 
 #include "mpd_commands.h"
-#include "mpdcli.h"
 #include "tftfunctions.h"
 #include "wifi.h"
 
 #include <M5Unified.h>
 
-static MpdConnection con;
+static MPD_Commands _mpd;
+MPD_Commands& mpd = _mpd;
 
-static void show_player(MPD_PLAYER& player)
+void MPD_Commands::show_player(MPD_PLAYER& player)
 {
     tft_println("Player: " + String(player.player_name));
 }
 
-void toggle_mpd_status()
+void MPD_Commands::toggle_mpd_status()
 {
     if (start_wifi()) {
         auto player = Config.get_active_mpd();
         show_player(player);
-        if (con.Connect(player.player_ip, player.player_port)) {
-            if (con.IsPlaying()) {
+        if (this->con.Connect(player.player_ip, player.player_port)) {
+            if (this->con.IsPlaying()) {
                 tft_println_highlight("Stop playing");
-                con.Stop();
+                this->con.Stop();
             } else {
                 tft_println_highlight("Start playing");
-                con.Play();
+                this->con.Play();
             }
-            con.Disconnect();
+            this->con.Disconnect();
         }
         vTaskDelay(500);
         tft_clear();
     }
 }
 
-void show_mpd_status()
+void MPD_Commands::show_mpd_status()
 {
     auto bat_level = M5.Power.getBatteryLevel();
     auto heap = ESP.getFreeHeap() / 1024;
@@ -62,27 +62,27 @@ void show_mpd_status()
     if (start_wifi()) {
         auto player = Config.get_active_mpd();
         show_player(player);
-        if (con.Connect(player.player_ip, player.player_port)) {
-            con.GetStatus();
-            con.GetCurrentSong();
-            con.Disconnect();
+        if (this->con.Connect(player.player_ip, player.player_port)) {
+            this->con.GetStatus();
+            this->con.GetCurrentSong();
+            this->con.Disconnect();
         }
         vTaskDelay(3000);
         tft_clear();
     }
 }
 
-void play_favourite(const FAVOURITE& fav)
+void MPD_Commands::play_favourite(const FAVOURITE& fav)
 {
     if (start_wifi()) {
         auto player = Config.get_active_mpd();
         show_player(player);
         tft_println_highlight("Play " + String(fav.fav_name));
-        if (con.Connect(player.player_ip, player.player_port)) {
-            con.Clear();
-            con.Add_Url(fav.fav_url);
-            con.Play();
-            con.Disconnect();
+        if (this->con.Connect(player.player_ip, player.player_port)) {
+            this->con.Clear();
+            this->con.Add_Url(fav.fav_url);
+            this->con.Play();
+            this->con.Disconnect();
         }
         vTaskDelay(1500);
         tft_clear();
