@@ -30,6 +30,7 @@
 #include "wifi.h"
 
 static unsigned long wifi_started = 0;
+static Menu menu;
 
 void setup()
 {
@@ -48,7 +49,7 @@ void setup()
         vTaskDelay(3000);
     }
     // Create menus based on config
-    CreateMenus();
+    menu.CreateMenus();
     // start wifi and show current MPD status of actiev player
     if (start_wifi()) {
         tft_clear();
@@ -73,7 +74,7 @@ void loop()
     }
     if (M5.BtnB.wasPressed()) {
         start_wifi();
-        ShowMenu();
+        menu.Show();
         wifi_started = millis();
     }
     if (M5.BtnC.wasPressed()) {

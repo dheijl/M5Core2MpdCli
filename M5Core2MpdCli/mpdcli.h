@@ -249,7 +249,7 @@ private:
             }
         }
         if (n <= 0) {
-            tft_println("no response");
+            tft_println_error("no response");
             return string();
         }
         uint8_t buf[4096];
@@ -311,7 +311,7 @@ public:
             return false;
         }
         MpdStatus mpd_status(data);
-        string status = mpd_status.getState();
+        auto status = mpd_status.getState();
         tft_print("MPD status: ");
         tft_println_highlight(String(status.c_str()));
         return status.compare("play") == 0;

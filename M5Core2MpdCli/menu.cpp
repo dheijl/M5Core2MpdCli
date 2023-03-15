@@ -23,17 +23,10 @@
 
 #include <M5Unified.h>
 
-static Menu MainMenu(30);
-static Menu PlayerMenu(40);
-static vector<Menu*> FavouriteMenus;
-
-static void select_player();
-static void select_favourite();
-
-static void select_player()
+void Menu::select_player()
 {
     auto players = Config.getPlayers();
-    int selected = PlayerMenu.display_menu();
+    int selected = this->PlayerMenu.display_menu();
     if ((selected >= 0) && (selected < players.size())) {
         auto pl = players[selected]->player_name;
         tft_clear();
@@ -43,10 +36,10 @@ static void select_player()
     }
 }
 
-static void select_favourite(int page)
+void Menu::select_favourite(int page)
 {
     auto favs = Config.getFavourites();
-    auto fav_menu = FavouriteMenus[page];
+    auto fav_menu = this->FavouriteMenus[page];
     int selected = fav_menu->display_menu();
     if ((selected >= 0) && (selected < fav_menu->size() - 1)) {
         selected = (page * 10) + selected;
@@ -56,21 +49,21 @@ static void select_favourite(int page)
     }
 }
 
-void ShowMenu()
+void Menu::Show()
 {
     tft_clear();
     int nfavs = Config.getFavourites().size();
     int npages = (nfavs % 10) == 0 ? (nfavs / 10) : (nfavs / 10) + 1;
-    int selected = MainMenu.display_menu();
+    int selected = this->MainMenu.display_menu();
     if (selected == 0) {
-        select_player();
+        this->select_player();
     } else if (selected <= npages) {
-        select_favourite(selected - 1);
+        this->select_favourite(selected - 1);
     }
     tft_clear();
 }
 
-void CreateMenus()
+void Menu::CreateMenus()
 {
     // main menu
     DPRINT("Creating MAIN menu");
@@ -87,26 +80,26 @@ void CreateMenus()
     int nfavs = favs.size();
     int npages = (nfavs % 10) == 0 ? (nfavs / 10) : (nfavs / 10) + 1;
     npages = min(npages, 5);
-    MainMenu.reserve(npages + 2);
+    this->MainMenu.reserve(npages + 2);
     for (int i = 0; i <= npages; i++) {
-        MainMenu.add_line(mlines[i]);
+        this->MainMenu.add_line(mlines[i]);
     }
-    MainMenu.add_line(mlines[6]);
+    this->MainMenu.add_line(mlines[6]);
     DPRINT("Main menu lines: " + String(MainMenu.size()));
     // player menu
     DPRINT("Creating PLAYER menu");
     auto players = Config.getPlayers();
-    PlayerMenu.reserve(players.size() + 1);
+    this->PlayerMenu.reserve(players.size() + 1);
     for (auto p : players) {
-        PlayerMenu.add_line(p->player_name);
+        this->PlayerMenu.add_line(p->player_name);
     }
-    PlayerMenu.add_line("Return");
+    this->PlayerMenu.add_line("Return");
     DPRINT("Player menu lines: " + String(MainMenu.size()));
     // favourites Menus
-    FavouriteMenus.reserve(npages + 1);
+    this->FavouriteMenus.reserve(npages + 1);
     for (int page = 0; page < npages; ++page) {
         DPRINT("Creating FAVOURITES menu " + String(page));
-        auto favmenu = new Menu(20);
+        auto favmenu = new SubMenu(20);
         favmenu->reserve(11);
         int ifrom = page * 10;
         int ito = ifrom + 10;
@@ -116,7 +109,7 @@ void CreateMenus()
             favmenu->add_line(favs[i]->fav_name);
         }
         favmenu->add_line("Return");
-        FavouriteMenus.push_back(favmenu);
+        this->FavouriteMenus.push_back(favmenu);
         DPRINT("Favourites menu " + String(page) + " lines: " + String(favmenu->size()));
     }
     DPRINT("Menus created");

@@ -28,7 +28,7 @@ typedef struct menuline {
     const char* text;
 } MENULINE;
 
-class Menu {
+class SubMenu {
 private:
     uint16_t x;
     uint16_t y;
@@ -47,13 +47,13 @@ private:
     }
 
 public:
-    Menu(uint16_t y_incr)
+    SubMenu(uint16_t y_incr)
         : x(2)
         , y(2)
     {
         this->y_incr = y_incr;
     }
-    ~Menu()
+    ~SubMenu()
     {
         for (auto ml = this->lines.begin(); ml != this->lines.end(); ++ml) {
             delete *ml;
@@ -127,6 +127,20 @@ public:
     }
 };
 
-void CreateMenus();
+class Menu {
+private:
+    SubMenu MainMenu;
+    SubMenu PlayerMenu;
+    vector<SubMenu*> FavouriteMenus;
+    void select_player();
+    void select_favourite(int page);
 
-void ShowMenu();
+public:
+    Menu()
+        : MainMenu(30)
+        , PlayerMenu(40)
+    {
+    }
+    void CreateMenus();
+    void Show();
+};
