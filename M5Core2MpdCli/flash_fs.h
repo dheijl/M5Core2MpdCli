@@ -21,13 +21,16 @@
 
 #include "config.h"
 
-bool read_player_index();
-void write_player_index(uint16_t new_pl);
+class NVS_Flash {
+public:
+    static bool read_player_index();
+    static void write_player_index(uint16_t new_pl);
 
-bool write_wifi_FLASH(const WIFI_ACC_PT& ap);
-bool write_players_FLASH(const PLAYERS& players);
-bool write_favourites_FLASH(const FAVOURITES& favourites);
+    static bool write_wifi(const WIFI_ACC_PT& ap);
+    static bool write_players(const PLAYERS& players);
+    static bool write_favourites(const FAVOURITES& favourites);
 
-bool read_wifi_FLASH(WIFI_ACC_PT& ap);
-bool read_players_FLASH(PLAYERS& players);
-bool read_favourites_FLASH(FAVOURITES& favourites);
+    static bool read_wifi(WIFI_ACC_PT& ap);
+    static bool read_players(PLAYERS& players);
+    static bool read_favourites(FAVOURITES& favourites);
+};

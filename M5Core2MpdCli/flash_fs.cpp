@@ -32,7 +32,7 @@ const char* NVS_PLAYERS = "players";
 const char* NVS_FAVS = "favs";
 const char* NVS_CUR_MPD = "curmpd";
 
-bool write_wifi_FLASH(const WIFI_ACC_PT& ap)
+bool NVS_Flash::write_wifi(const WIFI_ACC_PT& ap)
 {
     Preferences prefs;
     bool result = false;
@@ -54,7 +54,7 @@ bool write_wifi_FLASH(const WIFI_ACC_PT& ap)
     return result;
 }
 
-bool read_wifi_FLASH(WIFI_ACC_PT& ap)
+bool NVS_Flash::read_wifi(WIFI_ACC_PT& ap)
 {
     Preferences prefs;
     if (!prefs.begin(NVS_WIFI, true)) {
@@ -77,7 +77,7 @@ bool read_wifi_FLASH(WIFI_ACC_PT& ap)
     return true;
 }
 
-bool write_players_FLASH(const PLAYERS& players)
+bool NVS_Flash::write_players(const PLAYERS& players)
 {
     Preferences prefs;
     bool result = false;
@@ -107,7 +107,7 @@ bool write_players_FLASH(const PLAYERS& players)
     return result;
 }
 
-bool read_players_FLASH(PLAYERS& players)
+bool NVS_Flash::read_players(PLAYERS& players)
 {
     Preferences prefs;
     bool result = false;
@@ -145,7 +145,7 @@ bool read_players_FLASH(PLAYERS& players)
     return result;
 }
 
-bool write_favourites_FLASH(const FAVOURITES& favourites)
+bool NVS_Flash::write_favourites(const FAVOURITES& favourites)
 {
     Preferences prefs;
     bool result = false;
@@ -175,7 +175,7 @@ bool write_favourites_FLASH(const FAVOURITES& favourites)
     return result;
 }
 
-bool read_favourites_FLASH(FAVOURITES& favourites)
+bool NVS_Flash::read_favourites(FAVOURITES& favourites)
 {
     Preferences prefs;
     bool result = false;
@@ -210,7 +210,7 @@ bool read_favourites_FLASH(FAVOURITES& favourites)
     return result;
 }
 
-void write_player_index(uint16_t new_pl)
+void NVS_Flash::write_player_index(uint16_t new_pl)
 {
     Preferences prefs;
     if (!prefs.begin(NVS_CUR_MPD, false)) {
@@ -229,7 +229,7 @@ void write_player_index(uint16_t new_pl)
     prefs.end();
 }
 
-bool read_player_index()
+bool NVS_Flash::read_player_index()
 {
     Preferences prefs;
     if (!prefs.begin(NVS_CUR_MPD, true)) {

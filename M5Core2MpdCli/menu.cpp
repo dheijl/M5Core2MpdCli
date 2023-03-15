@@ -32,7 +32,7 @@ void Menu::select_player()
         tft_clear();
         tft_println("New player @" + String(pl));
         Config.set_player_index((uint16_t)selected);
-        write_player_index(selected);
+        NVS_Flash::write_player_index(selected);
     }
 }
 
