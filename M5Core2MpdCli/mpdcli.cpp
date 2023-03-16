@@ -19,21 +19,21 @@
 
 #include "config.h"
 
-#include "mpd_commands.h"
+#include "mpdcli.h"
 #include "tftfunctions.h"
 #include "wifi.h"
 
 #include <M5Unified.h>
 
-static MPD_Commands _mpd;
-MPD_Commands& mpd = _mpd;
+static MPD_Client _mpd;
+MPD_Client& mpd = _mpd;
 
-void MPD_Commands::show_player(MPD_PLAYER& player)
+void MPD_Client::show_player(MPD_PLAYER& player)
 {
     tft_println("Player: " + String(player.player_name));
 }
 
-void MPD_Commands::toggle_mpd_status()
+void MPD_Client::toggle_mpd_status()
 {
     if (start_wifi()) {
         auto player = Config.get_active_mpd();
@@ -53,7 +53,7 @@ void MPD_Commands::toggle_mpd_status()
     }
 }
 
-void MPD_Commands::show_mpd_status()
+void MPD_Client::show_mpd_status()
 {
     auto bat_level = M5.Power.getBatteryLevel();
     auto heap = ESP.getFreeHeap() / 1024;
@@ -72,7 +72,7 @@ void MPD_Commands::show_mpd_status()
     }
 }
 
-void MPD_Commands::play_favourite(const FAVOURITE& fav)
+void MPD_Client::play_favourite(const FAVOURITE& fav)
 {
     if (start_wifi()) {
         auto player = Config.get_active_mpd();

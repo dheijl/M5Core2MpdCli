@@ -19,7 +19,7 @@
 
 #include "menu.h"
 #include "flash_fs.h"
-#include "mpd_commands.h"
+#include "mpdcli.h"
 
 #include <M5Unified.h>
 
@@ -32,7 +32,7 @@ void Menu::select_player()
         tft_clear();
         tft_println("New player @" + String(pl));
         Config.set_player_index((uint16_t)selected);
-        NVS_Flash::write_player_index(selected);
+        NVS_Config::write_player_index(selected);
     }
 }
 

@@ -396,3 +396,16 @@ public:
         return true;
     }
 };
+
+class MPD_Client {
+private:
+    MpdConnection con;
+    void show_player(MPD_PLAYER& player);
+
+public:
+    void show_mpd_status();
+    void toggle_mpd_status();
+    void play_favourite(const FAVOURITE& fav);
+};
+
+extern MPD_Client& mpd;

@@ -21,7 +21,7 @@
 
 #include "config.h"
 
-class NVS_Flash {
+class NVS_Config {
 public:
     static bool read_player_index();
     static void write_player_index(uint16_t new_pl);

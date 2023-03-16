@@ -24,7 +24,6 @@
 
 #include "debug.h"
 #include "menu.h"
-#include "mpd_commands.h"
 #include "mpdcli.h"
 #include "tftfunctions.h"
 #include "wifi.h"

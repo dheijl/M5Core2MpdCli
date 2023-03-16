@@ -88,10 +88,10 @@ bool Configuration::load_SD_config()
 bool Configuration::load_FLASH_config()
 {
     tft_println("Load FLASH config");
-    if (NVS_Flash::read_wifi(this->ap)
-        && NVS_Flash::read_players(this->mpd_players)
-        && NVS_Flash::read_favourites(this->favourites)
-        && NVS_Flash::read_player_index()) {
+    if (NVS_Config::read_wifi(this->ap)
+        && NVS_Config::read_players(this->mpd_players)
+        && NVS_Config::read_favourites(this->favourites)
+        && NVS_Config::read_player_index()) {
         return true;
     } else {
         return false;
@@ -102,9 +102,9 @@ bool Configuration::save_FLASH_config()
 {
     tft_clear();
     tft_println("Save FLASH config");
-    if (NVS_Flash::write_wifi(this->ap)
-        && NVS_Flash::write_players(this->mpd_players)
-        && NVS_Flash::write_favourites(this->favourites)) {
+    if (NVS_Config::write_wifi(this->ap)
+        && NVS_Config::write_players(this->mpd_players)
+        && NVS_Config::write_favourites(this->favourites)) {
         return true;
     } else {
         return false;
