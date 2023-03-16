@@ -42,7 +42,7 @@ void Menu::select_favourite(int page)
     auto fav_menu = this->FavouriteMenus[page];
     int selected = fav_menu->display_menu();
     if ((selected >= 0) && (selected < fav_menu->size() - 1)) {
-        selected = (page * 10) + selected;
+        selected = (page * Menu::MAXLINES) + selected;
         FAVOURITE& fav = *favs[selected];
         tft_clear();
         mpd.play_favourite(fav);
@@ -53,7 +53,7 @@ void Menu::Show()
 {
     tft_clear();
     int nfavs = Config.getFavourites().size();
-    int npages = (nfavs % 10) == 0 ? (nfavs / 10) : (nfavs / 10) + 1;
+    int npages = (nfavs % Menu::MAXLINES) == 0 ? (nfavs / Menu::MAXLINES) : (nfavs / Menu::MAXLINES) + 1;
     int selected = this->MainMenu.display_menu();
     if (selected == 0) {
         this->select_player();
@@ -78,7 +78,7 @@ void Menu::CreateMenus()
     };
     auto favs = Config.getFavourites();
     int nfavs = favs.size();
-    int npages = (nfavs % 10) == 0 ? (nfavs / 10) : (nfavs / 10) + 1;
+    int npages = (nfavs % Menu::MAXLINES) == 0 ? (nfavs / Menu::MAXLINES) : (nfavs / Menu::MAXLINES) + 1;
     npages = min(npages, 5);
     this->MainMenu.reserve(npages + 2);
     for (int i = 0; i <= npages; i++) {
@@ -101,8 +101,8 @@ void Menu::CreateMenus()
         DPRINT("Creating FAVOURITES menu " + String(page));
         auto favmenu = new SubMenu(20);
         favmenu->reserve(11);
-        int ifrom = page * 10;
-        int ito = ifrom + 10;
+        int ifrom = page * Menu::MAXLINES;
+        int ito = ifrom + Menu::MAXLINES;
         ito = min(nfavs, ito);
         for (int i = ifrom; i < ito; i++) {
             DPRINT("FAV#" + String(i) + ":" + String(favs[i]->fav_name));
