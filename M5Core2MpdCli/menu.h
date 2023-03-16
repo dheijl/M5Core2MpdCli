@@ -141,6 +141,13 @@ public:
         , PlayerMenu(40)
     {
     }
+    ~Menu()
+    {
+        for (auto fm = this->FavouriteMenus.begin(); fm != this->FavouriteMenus.end(); ++fm) {
+            delete *fm;
+        }
+        this->FavouriteMenus.clear();
+    }
     void CreateMenus();
     void Show();
 };
