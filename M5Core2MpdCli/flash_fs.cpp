@@ -27,10 +27,10 @@
 
 #include <string>
 
-const char* NVS_WIFI = "wifi";
-const char* NVS_PLAYERS = "players";
-const char* NVS_FAVS = "favs";
-const char* NVS_CUR_MPD = "curmpd";
+static constexpr char* NVS_WIFI = "wifi";
+static constexpr char* NVS_PLAYERS = "players";
+static constexpr char* NVS_FAVS = "favs";
+static constexpr char* NVS_CUR_MPD = "curmpd";
 
 bool NVS_Config::write_wifi(const WIFI_ACC_PT& ap)
 {

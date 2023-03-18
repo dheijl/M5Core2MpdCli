@@ -97,7 +97,7 @@ public:
         // parse response into vector and then into map
         if (this->ResponseType == MpdOKType) {
             // build a vector of the response lines
-            string delimiter = "\n";
+            static const string delimiter = "\n";
             size_t pos_start = 0, pos_end, delim_len = delimiter.length();
             string token;
             vector<string> lines;

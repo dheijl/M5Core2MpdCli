@@ -67,7 +67,7 @@ void Menu::CreateMenus()
 {
     // main menu
     DPRINT("Creating MAIN menu");
-    static const char* mlines[] {
+    static constexpr char* mlines[] {
         "Select Player",
         "Favourites 1",
         "Favourites 2",

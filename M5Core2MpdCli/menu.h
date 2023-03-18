@@ -136,7 +136,7 @@ private:
     void select_favourite(int page);
 
 public:
-    const int MAXLINES = 10;
+    static const int MAXLINES = 10;
     Menu()
         : MainMenu(30)
         , PlayerMenu(40)
