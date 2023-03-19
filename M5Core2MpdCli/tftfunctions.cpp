@@ -35,7 +35,7 @@ void init_tft()
     M5.Display.setTextSize(1);
 }
 
-void tft_write(int16_t x, int16_t y, uint16_t color, const String s)
+void tft_write(int16_t x, int16_t y, uint16_t color, const String& s)
 {
     if (sleeping) {
         sleeping = false;
@@ -47,17 +47,17 @@ void tft_write(int16_t x, int16_t y, uint16_t color, const String s)
     DPRINT(String(x) + ", " + String(y) + ", " + String(color) + ", " + s);
 }
 
-void tft_write_error(int16_t x, int16_t y, const String s)
+void tft_write_error(int16_t x, int16_t y, const String& s)
 {
     tft_write(x, y, TFT_RED, s);
 }
 
-void tft_write_highlight(int16_t x, int16_t y, const String s)
+void tft_write_highlight(int16_t x, int16_t y, const String& s)
 {
     tft_write(x, y, TFT_GREENYELLOW, s);
 }
 
-void tft_println(const String s, uint16_t color)
+void tft_println(const String& s, uint16_t color)
 {
     if (sleeping) {
         sleeping = false;
@@ -68,17 +68,17 @@ void tft_println(const String s, uint16_t color)
     DPRINT(s);
 }
 
-void tft_println_error(const String s)
+void tft_println_error(const String& s)
 {
     tft_println(s, TFT_RED);
 }
 
-void tft_println_highlight(const String s)
+void tft_println_highlight(const String& s)
 {
     tft_println(s, TFT_GREENYELLOW);
 }
 
-void tft_print(const String s)
+void tft_print(const String& s)
 {
     if (sleeping) {
         sleeping = false;
