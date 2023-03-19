@@ -49,3 +49,8 @@ My favourites are all internet radio stations in my use case. I haven't tried an
 ## GUI
 
 The GUI is extremely basic, with this display one could do much better. But I hate GUI design, and it gives me the information I need. Feel free to make pull resuests if GUI is your thing...
+
+## Development environment
+
+I have used the Arduino "IDE" some years ago as there was nothing else available at the time. Now I started out with the new IDE 2.0, but it's so slow that you have to be a masochist to use it. Then I tried VSCode with the Arduino extension, and I was lucky that the extension recently got a major update that made it very usable (using the built-in Arduino CLI).
+To make C/CPP intellisense work reliably with the default mode instead of the TagParser, you have to use gnu++17 mode in _c_cpp_properties.json_, but the extension will revert it back to c++11 at each restart unless you disable "intelliSenseGen" in _arduino.json_. This means that you will have to generate a new intellisense config manually when needed (_Ctl_Alt_I_). Using the TagParser for intellisense is not really an option. Oh, and don't forget to set the output path!
