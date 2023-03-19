@@ -27,6 +27,8 @@
 
 #include <M5Unified.h>
 
+#include <string.h>
+
 #define TFCARD_CS_PIN GPIO_NUM_4
 
 bool SD_Config::read_wifi(WIFI_ACC_PT& ap)

@@ -1,0 +1,62 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"array": "cpp",
+			"chrono": "cpp",
+			"deque": "cpp",
+			"iterator": "cpp",
+			"list": "cpp",
+			"vector": "cpp",
+			"xhash": "cpp",
+			"xtree": "cpp",
+			"format": "cpp",
+			"forward_list": "cpp",
+			"initializer_list": "cpp",
+			"ranges": "cpp",
+			"regex": "cpp",
+			"span": "cpp",
+			"xstring": "cpp",
+			"xutility": "cpp",
+			"string": "cpp",
+			"unordered_map": "cpp",
+			"string_view": "cpp",
+			"istream": "cpp",
+			"*.tcc": "cpp",
+			"*.rh": "cpp",
+			"algorithm": "cpp",
+			"atomic": "cpp",
+			"charconv": "cpp",
+			"map": "cpp",
+			"cmath": "cpp",
+			"fstream": "cpp",
+			"functional": "cpp",
+			"memory": "cpp",
+			"optional": "cpp",
+			"ostream": "cpp",
+			"random": "cpp",
+			"tuple": "cpp",
+			"type_traits": "cpp",
+			"variant": "cpp",
+			"xlocale": "cpp",
+			"xlocnum": "cpp",
+			"xloctime": "cpp",
+			"xmemory": "cpp",
+			"bitset": "cpp",
+			"limits": "cpp",
+			"xlocmes": "cpp",
+			"ios": "cpp",
+			"system_error": "cpp",
+			"xiosbase": "cpp",
+			"unordered_set": "cpp",
+			"*.tpp": "cpp",
+			"*.def": "cpp",
+			"xlocinfo": "cpp",
+			"set": "cpp"
+		}
+	}
+}

@@ -25,6 +25,7 @@
 #include <M5Unified.h>
 #include <Preferences.h>
 
+#include <string.h>
 #include <string>
 
 static constexpr char* NVS_WIFI = "wifi";
