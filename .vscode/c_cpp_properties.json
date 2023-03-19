@@ -257,7 +257,7 @@
                 "C:\\Users\\Danny\\AppData\\Local\\Arduino15\\packages\\m5stack\\hardware\\esp32\\2.0.6\\cores\\esp32\\Arduino.h"
             ],
             "cStandard": "c11",
-            "cppStandard": "gnu++17",
+            "cppStandard": "c++11",
             "defines": [
                 "HAVE_CONFIG_H",
                 "MBEDTLS_CONFIG_FILE=\"mbedtls/esp_config.h\"",
