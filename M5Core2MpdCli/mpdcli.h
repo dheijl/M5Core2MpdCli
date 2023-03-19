@@ -33,12 +33,12 @@
 using std::string;
 using std::vector;
 
-static const string MPD_CURRENTSONG = "currentsong\n";
-static const string MPD_STATUS = "status\n";
-static const string MPD_START = "play\n";
-static const string MPD_STOP = "stop\n";
-static const string MPD_CLEAR = "clear\n";
-static const string MPD_ADD = "add {}\n";
+static const constexpr char* MPD_CURRENTSONG = "currentsong\n";
+static const constexpr char* MPD_STATUS = "status\n";
+static const constexpr char* MPD_START = "play\n";
+static const constexpr char* MPD_STOP = "stop\n";
+static const constexpr char* MPD_CLEAR = "clear\n";
+static const constexpr char* MPD_ADD = "add {}\n";
 
 enum MpdResponseType {
     MpdOKType,
@@ -292,7 +292,7 @@ public:
 
     bool GetStatus()
     {
-        Client.write(MPD_STATUS.c_str(), MPD_STATUS.length());
+        Client.write(MPD_STATUS);
         string data = read_data();
         if (data.length() == 0) {
             return false;
@@ -305,7 +305,7 @@ public:
 
     bool IsPlaying()
     {
-        Client.write(MPD_STATUS.c_str(), MPD_STATUS.length());
+        Client.write(MPD_STATUS);
         string data = read_data();
         if (data.length() == 0) {
             return false;
@@ -319,7 +319,7 @@ public:
 
     bool GetCurrentSong()
     {
-        Client.write(MPD_CURRENTSONG.c_str(), MPD_CURRENTSONG.length());
+        Client.write(MPD_CURRENTSONG);
         string data = read_data();
         if (data.length() == 0) {
             return false;
@@ -346,7 +346,7 @@ public:
 
     bool Stop()
     {
-        Client.write(MPD_STOP.c_str(), MPD_STOP.length());
+        Client.write(MPD_STOP);
         string data = read_data();
         if (data.length() == 0) {
             return false;
@@ -358,7 +358,7 @@ public:
 
     bool Play()
     {
-        Client.write(MPD_START.c_str(), MPD_START.length());
+        Client.write(MPD_START);
         string data = read_data();
         if (data.length() == 0) {
             return false;
@@ -370,7 +370,7 @@ public:
 
     bool Clear()
     {
-        Client.write(MPD_CLEAR.c_str(), MPD_CLEAR.length());
+        Client.write(MPD_CLEAR);
         string data = read_data();
         if (data.length() == 0) {
             return false;
