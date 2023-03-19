@@ -3,5 +3,6 @@
     "configuration": "PSRAM=enabled,PartitionScheme=default,CPUFreq=240,UploadSpeed=921600,DebugLevel=none,EraseFlash=none",
     "port": "COM5",
     "sketch": "M5Core2MpdCli\\M5Core2MpdCli.ino",
-    "output": "Y:\\build_vsc"
+    "output": "Y:\\build_vsc",
+    "intelliSenseGen": "disable"
 }
