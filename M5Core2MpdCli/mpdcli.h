@@ -75,7 +75,7 @@ protected:
     virtual void abstract() = 0;
 
 public:
-    MpdResponse(const string response)
+    MpdResponse(const string& response)
     {
         this->ResponseKind = MpdUninitializedKind;
         this->Response = response;
@@ -140,7 +140,7 @@ private:
     void abstract() override { }
 
 public:
-    MpdConnect(const string response)
+    MpdConnect(const string& response)
         : MpdResponse(response)
     {
         this->ResponseKind = MpdConnectKind;
@@ -161,7 +161,7 @@ private:
     void abstract() override { }
 
 public:
-    MpdCurrentSong(const string response)
+    MpdCurrentSong(const string& response)
         : MpdResponse(response)
     {
         if (this->getResponseType() == MpdOKType) {
@@ -201,7 +201,7 @@ private:
     void abstract() override { }
 
 public:
-    MpdStatus(const string response)
+    MpdStatus(const string& response)
         : MpdResponse(response)
     {
         if (this->getResponseType() == MpdOKType) {
@@ -221,7 +221,7 @@ private:
     void abstract() override { }
 
 public:
-    MpdSimpleCommand(const string response)
+    MpdSimpleCommand(const string& response)
         : MpdResponse(response)
     {
         if (this->getResponseType() == MpdOKType) {
