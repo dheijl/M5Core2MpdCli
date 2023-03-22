@@ -2,25 +2,6 @@
     "version": 4,
     "configurations": [
         {
-            "name": "Win32",
-            "compilerPath": "C:/Program Files/LLVM/bin/clang.exe",
-            "compilerArgs": [],
-            "intelliSenseMode": "windows-msvc-x64",
-            "includePath": [
-                "${workspaceFolder}/**",
-                "C:/Users/Danny/AppData/Local/Arduino15/packages/**",
-                "X:/Documents/Arduino/libraries/**"
-            ],
-            "forcedInclude": [],
-            "cStandard": "c17",
-            "cppStandard": "c++17",
-            "defines": [
-                "_DEBUG",
-                "UNICODE",
-                "_UNICODE"
-            ]
-        },
-        {
             "name": "Arduino",
             "compilerPath": "C:\\Users\\Danny\\AppData\\Local\\Arduino15\\packages\\m5stack\\tools\\xtensa-esp32-elf-gcc\\gcc8_4_0-esp-2021r2-patch5\\bin\\xtensa-esp32-elf-g++",
             "compilerArgs": [
@@ -44,7 +25,7 @@
                 "-fexceptions",
                 "-fno-rtti"
             ],
-            "intelliSenseMode": "gcc-x64",
+            "intelliSenseMode": "gcc-x86",
             "includePath": [
                 "C:\\Users\\Danny\\AppData\\Local\\Arduino15\\packages\\m5stack\\hardware\\esp32\\2.0.6\\tools\\sdk\\esp32\\include\\newlib\\platform_include",
                 "C:\\Users\\Danny\\AppData\\Local\\Arduino15\\packages\\m5stack\\hardware\\esp32\\2.0.6\\tools\\sdk\\esp32\\include\\freertos\\include",
