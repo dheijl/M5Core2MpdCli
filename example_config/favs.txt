@@ -2,18 +2,18 @@ Radio Delfino|https://nr8.newradio.it/proxy/emaamo00?mp=/stream
 Radio 1 Classics|http://icecast.vrtcdn.be/radio1_classics_high.mp3
 Radio 1|http://icecast.vrtcdn.be/radio1-high.mp3
 Radio 2 OVL|http://icecast.vrtcdn.be/ra2ovl-high.mp3
-Classics 21|https://radios.rtbf.be/classic21-128.mp3
-D.I. Blues|http://orion.shoutca.st:8990/stream
-D.I. Jazz|http://orion.shoutca.st:8950/stream
-R. Paradise Rock|http://stream.radioparadise.com/rock-flacm
+Classics 21|https://radio.rtbf.be/c21/mp3-160/me
+Classics 21 Blues|https://radio.rtbf.be/c21-blues/mp3-128/me
 StuBru Tijdloze|http://icecast.vrtcdn.be/stubru_tijdloze-high.mp3
+StuBruhttp://icecast.vrtcdn.be/stubru-high.mp3
 Willy|https://playerservices.streamtheworld.com/api/livestream-redirect/WILLY.mp3
 Willy-class-x|https://icecast-qmusicbe-cdp.triple-it.nl/willy-class-x.mp3
-Radio Paradise Main|https://stream.radioparadise.com/aac-320
-Radio Paradise Mellow|https://stream.radioparadise.com/mellow-320
-Studio Brussel|http://icecast.vrtcdn.be/stubru-high.mp3
+R. Paradise Rock|http://stream.radioparadise.com/rock-flacm
+R. Paradise Main|http://stream.radioparadise.com/flacm
+R. Paradise Mellow|http://stream.radioparadise.com/mellow-flacm 
+R. Paradise Global|http://stream.radioparadise.com/global-flacm
+TopBlues|http://us3.internet-radio.com:8342/stream
 MNM Hits|http://icecast.vrtcdn.be/mnm_hits-high.mp3
-D.I. Rock|http://orion.shoutca.st:8871/stream
 The Jazz Groove|http://west-aac-64.streamthejazzgroove.com/stream
 Radio Caroline|http://sc3.radiocaroline.net:8030
 Zappa Radio|http://streams.norbert.de:8000/zappa.aac
