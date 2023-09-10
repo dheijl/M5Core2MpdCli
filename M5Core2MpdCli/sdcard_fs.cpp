@@ -107,6 +107,7 @@ bool SD_Config::parse_wifi_file(File wifif, WIFI_ACC_PT& ap)
                 ap.ssid = strdup(parts[0].c_str());
                 ap.psw = strdup(parts[1].c_str());
                 result = true;
+                break;
             }
         }
     }
