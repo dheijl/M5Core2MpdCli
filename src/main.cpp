@@ -26,7 +26,7 @@
 #include "menu.h"
 #include "mpdcli.h"
 #include "tftfunctions.h"
-#include "wifi.h"
+#include "wifi_utils.h"
 
 static unsigned long wifi_started = 0;
 static Menu menu;

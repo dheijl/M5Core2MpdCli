@@ -21,7 +21,7 @@
 
 #include "mpdcli.h"
 #include "tftfunctions.h"
-#include "wifi.h"
+#include "wifi_utils.h"
 
 #include <M5Unified.h>
 
