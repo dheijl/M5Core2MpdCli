@@ -46,7 +46,6 @@ typedef struct wifi_acc_pt {
 
 typedef struct mpd_player {
     const char* player_name;
-    const char* player_hostname;
     const char* player_ip;
     uint16_t player_port;
 } MPD_PLAYER;

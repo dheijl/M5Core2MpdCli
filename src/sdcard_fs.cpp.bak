@@ -129,9 +129,7 @@ bool SD_Config::parse_players_file(File plf, PLAYERS& players)
             if (parts.size() == 3) {
                 MPD_PLAYER* mpd = new MPD_PLAYER();
                 mpd->player_name = strdup(parts[0].c_str());
-                string player_name = parts[1];
-                mpd->player_hostname = strdup(parts[1].c_str());
-                mpd->player_ip = NULL;
+                mpd->player_ip = strdup(parts[1].c_str());
                 mpd->player_port = stoi(parts[2]);
                 players.push_back(mpd);
                 tft_println(String(mpd->player_name) + " " + String(mpd->player_ip) + ":" + String(mpd->player_port));
